@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FaQrcode } from 'react-icons/fa';
 import { Line } from 'react-chartjs-2'
-import ProfileForm from './profileForm';
+// import ProfileForm from './profileForm';
 
 const Profile = () => {
   const [qrcode, setQr] = useState(false)
@@ -56,10 +56,10 @@ const Profile = () => {
     //     </div>
     //   </div>
 
-    //   <div className={`${showProfile ? 'flex' : 'hidden'} profile-form`}>
-    //     <ProfileForm />
-    //     <button onClick={handleUpdate} className='rounded-sm bg-[#ED9017] px-3 py-1 my-2 text-white uppercase font-semibold text-xs'>Update</button>
-    //   </div>
+      // <div className={`${showProfile ? 'flex' : 'hidden'} profile-form`}>
+      //   {/* <ProfileForm /> */}
+      //   <button onClick={handleUpdate} className='rounded-sm bg-[#ED9017] px-3 py-1 my-2 text-white uppercase font-semibold text-xs'>Update</button>
+      // </div>
 
     //   <div className={`${updateDetails ? 'flex' : 'hidden'} flex-col gap-2 profile-form`}>
     //     <div className="user-stats flex justify-start gap-2">
