@@ -5,13 +5,13 @@ import AppliedJobs from './AppliedJobs';
 import Notifications from './Notifications';
 import Messages from './Messages';
 import Scholarships from './Scholarships';
-import Profile from './Profile';
 import jobs from '../../assets/job.svg'
 import applied from '../../assets/appliedJobs.svg'
 import noti from '../../assets/noti.svg'
 import msg from '../../assets/message.svg'
 import sch from '../../assets/scholarship.svg'
 import profile from '../../assets/profile.svg'
+import ProfileOptions from './ProfileOptions';
 
 const User = (props) => {
 
@@ -96,7 +96,7 @@ const User = (props) => {
         {showNoti && <Notifications/>}
         {showMsgs && <Messages/>}
         {showSch && <Scholarships/>}
-        {showProfile && <Profile/>}
+        {showProfile && <ProfileOptions/>}
     </div>
     
   )

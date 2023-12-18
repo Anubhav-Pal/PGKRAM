@@ -1,19 +1,3 @@
-// import React from 'react'
-// import NotificationDisplay from '../../components/NotificationDisplay'
-
-// const Notifications = () => {
-//   return (
-//     <div className='absolute right-[40px] bg-white top-[230px] text-left z-10 w-1/4'>
-//         <NotificationDisplay icon='icon' notihead='Application sent' notivalue='Applications for Google companies have entered for company review' notitime='25 minutes ago'/>
-
-//         <NotificationDisplay icon='icon' notihead='Application sent' notivalue='Applications for Google companies have entered for company review' notitime='25 minutes ago'/>
-//     </div>
-//   )
-// }
-
-// export default Notifications
-
-// NotificationComponent.jsx
 import React, { useState } from 'react';
 import NotificationDisplay from '../../components/NotificationDisplay'; // Import your existing NotificationDisplay component
 
