@@ -80,7 +80,7 @@ const HomePage = () => {
       console.error('Error uploading file:', error);
     }
   };
-  //The below function is used to fetch data from mongodb and store that data in the "data variable"
+  // The below function is used to fetch data from mongodb and store that data in the "data variable"
   // useEffect(() => {
   //   const fetchData = async () => {
   //     try {
