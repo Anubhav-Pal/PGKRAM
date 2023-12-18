@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { FaQrcode } from 'react-icons/fa';
 import { Line } from 'react-chartjs-2'
-import ProfileForm from './profileForm';
+// import ProfileForm from './profileForm';
 
 
 const Profile = () => {
@@ -58,7 +58,7 @@ const Profile = () => {
       </div>
 
       <div className={`${showProfile ? 'flex' : 'hidden'} profile-form`}>
-        <ProfileForm />
+        {/* <ProfileForm /> */}
         <button onClick={handleUpdate} className='rounded-sm bg-[#ED9017] px-3 py-1 my-2 text-white uppercase font-semibold text-xs'>Update</button>
       </div>
 
