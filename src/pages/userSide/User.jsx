@@ -60,9 +60,11 @@ const User = (props) => {
         setShowProfile(false);
       };
       const handleProfileClick = () => {
-        if(showProfile)
-        {setShowProfile(false)}
-        else
+        setShowJobs(false);
+        setShowAppliedJobs(false);
+        setShowNoti(false);
+        setShowMsgs(false);
+        setShowSch(false);
         setShowProfile(true);
       };
 

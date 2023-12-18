@@ -1,38 +1,62 @@
 import React, { useState } from 'react';
-import Profile from './Profile'; // Import your Profile component
+import Scholarships from './Scholarships';
+import AIInterview from './AIInterview';
+import MyJobs from './MyJobs';
+import ViewProfile from './ViewProfile';
 
 const ProfileOptions = () => {
-  const [viewProfile, setViewProfile] = useState(false);
+  const [activeButton, setActiveButton] = useState('View profile');
 
-  const handleViewProfileClick = () => {
-    setViewProfile(true);
-    console.log("opening profile");
+  const handleButtonClick = (buttonName) => {
+    setActiveButton(buttonName);
   };
 
-  if (viewProfile) {
-    return <Profile />;
-  }
-
   return (
-    <div className="absolute right-[40px] bg-white top-[230px] text-left z-10 w-1/5 p-4">
-      <ul className='flex flex-col justify-center items-center'>
-        <div className='flex m-auto w-full justify-evenly items-center'>
-          <div className='border-black border-2 w-10 h-10 rounded-full flex justify-center items-center'>icon</div>
-          <div className='font-bold'>Vrishhti Goel</div>
+    <div className=''>
+      <div className=' items-center flex gap-10 p-5 text-[12px] text-gray-600 shadow-md'>
+
+        <div className={`relative group flex flex-col items-center`}>
+          <button className={`hover:text-gray-900`} onClick={() => handleButtonClick('View profile')}>
+            View profile
+          </button>
+          {activeButton === 'View profile' && (
+            <div className="mt-1 rounded-2xl bg-violet-500 h-1 w-4"></div>
+          )}
         </div>
-        <button
-          className='px-1 w-3/4 rounded-full border-[#4329EA] border-2 text-center my-2'
-          onClick={handleViewProfileClick}
-        >
-          View Profile
-        </button>
-        <div className='w-full h-[2px] bg-gray-300'></div>
-        <li className='p-2'>My Jobs</li>
-        <div className='w-full h-[2px] bg-gray-300'></div>
-        <li className='p-2'>AI interview</li>
-        <div className='w-full h-[2px] bg-gray-300'></div>
-        <li className='p-2'>Scholarship</li>
-      </ul>
+
+        <div className={`relative group  flex flex-col items-center`}>
+          <button className={`hover:text-gray-900`} onClick={() => handleButtonClick('My jobs')}>
+            My jobs
+          </button>
+          {activeButton === 'My jobs' && (
+            <div className="mt-1 rounded-2xl bg-violet-500 h-1 w-4"></div>
+          )}
+        </div>
+        <div className={`relative group  flex flex-col items-center`}>
+          <button className={`hover:text-gray-900`} onClick={() => handleButtonClick('AI Interview')}>
+            AI Interview
+          </button>
+          {activeButton === 'AI Interview' && (
+            <div className="mt-1 rounded-2xl bg-violet-500 h-1 w-4"></div>
+          )}
+        </div>
+
+        <div className={`relative group  flex flex-col items-center`}>
+          <button className={`hover:text-gray-900`} onClick={() => handleButtonClick('Scholarship')}>
+            Scholarship
+          </button>
+          {activeButton === 'Scholarship' && (
+            <div className="mt-1 rounded-2xl bg-violet-500 h-1 w-4"></div>
+          )}
+        </div>
+      </div>
+
+      <div>
+        {activeButton === 'View profile' && <ViewProfile />}
+        {activeButton === 'My jobs' && <MyJobs />}
+        {activeButton === 'AI Interview' && <AIInterview />}
+        {activeButton === 'Scholarship' && <Scholarships />}
+      </div>
     </div>
   );
 }
