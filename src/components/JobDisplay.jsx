@@ -4,17 +4,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import saveicon from '../assets/saveicon.svg';
 import shareicon from '../assets/shareicon.svg';
 import { Link } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
 
 const JobDisplay = (props) => {
   const [isSaved, setIsSaved] = useState(false);
-  const [showSharePopup, setShowSharePopup] = useState(false);
-  const [uniqueLink, setUniqueLink] = useState('');
 
   useEffect(() => {
     const savedJobs = JSON.parse(localStorage.getItem('savedJobs')) || [];
     const isJobSaved = savedJobs.some(savedJob => savedJob && savedJob.id && savedJob.id === props.id);
-
+  
     setIsSaved(isJobSaved);
   }, [props.id, setIsSaved]);
 
@@ -47,22 +44,27 @@ const JobDisplay = (props) => {
   };
 
 
-  console.log(props.jobData);
+  const singleJob = props.jobData;
+  // console.log(props.jobData);
 
-  
+  const words = singleJob.about.split(/\s+/);
+  const text = words.slice(0, 15).join(' ');
+
+
+
   return (
     <div className='bg-white flex p-4 justify-center items-center my-2 rounded-lg'>
       <Link to='/company' target='_blank'>
-        <div>{props.icon}</div>
+        <div>{singleJob.icon}</div>
       </Link>
 
       <div className='ml-4 w-4/5'>
-        <div className='font-semibold'>{props.position}</div>
+        <div className='font-semibold'>{singleJob.job_title}</div>
         <div className='flex text-[13px]'>
-          <div>{props.company}</div>
-          <div className='ml-10'>{props.medium}</div>
+          <div>{singleJob.company}</div>
+          <div className='ml-10'>{singleJob.location}</div>
         </div>
-        <div className='text-[14px]'>{props.text}</div>
+        <div className='text-[14px]'>{text}...</div>
       </div>
 
       <div>
@@ -76,20 +78,10 @@ const JobDisplay = (props) => {
         <button onClick={handleSave}>
           <img className='mb-4 bg-[#ED9017] rounded-md p-2' src={saveicon} alt="saveicon" />
         </button>
-        <button onClick={() => { setShowSharePopup(true); generateUniqueLink(); }}>
+        <button>
           <img className='bg-[#ED9017] rounded-md p-2' src={shareicon} alt="shareicon" />
         </button>
       </div>
-
-      {/* Share Popup */}
-      {showSharePopup && (
-        <div className="share-popup">
-          <p>Share this job:</p>
-          <input type="text" value={uniqueLink} readOnly />
-          <button onClick={openNewWebpage}>Open Webpage</button>
-          <button onClick={() => setShowSharePopup(false)}>Close</button>
-        </div>
-      )}
     </div>
   );
 }
