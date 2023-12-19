@@ -1,9 +1,11 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import searchicon from '../../assets/searchicon.svg';
 import JobDisplay from '../../components/JobDisplay';
 import Featured from '../../components/Featured';
+import axios from 'axios';
 const Jobs = () => {
-
+  const [data,setData]=useState(null);
+  
   const [jobs, setJobs] = useState([
     {
       id: 1,
@@ -73,7 +75,19 @@ const Jobs = () => {
   const handlePopupClose = () => {
     setShowPremiumPopup(false);
   };
-
+  useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await axios.get('https://pgrkam-backend.onrender.com/get-jobs');
+          setData(response.data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+  
+      fetchData();
+    },[])
+  console.log(data)
   return (
     <div className='flex m-auto py-4 bg-gray-100'>
       {/* 1st col */}
