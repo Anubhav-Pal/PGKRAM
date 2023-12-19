@@ -7,6 +7,7 @@ const Dashboard = () => {
   const [retention,setRetentionData]=useState(null)
   const[traffic,setTraffic]=useState(null)
   const [user,setUser]=useState(null)
+  const [options,setOptions]=useState(null)
   useEffect(() => {
     const fetchTrafficData = async () => {
       try {
@@ -44,7 +45,17 @@ const Dashboard = () => {
       }
     };
     fetchUserData();
+    const fetchOptionsData = async () => {
+      try {
+        const response = await axios.get('https://pgrkam-backend.onrender.com/get-options');
+        setUser(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchOptionsData();
   },[])
+  console.log(options)
   console.log(user)
   console.log(retention)
   console.log(data)
