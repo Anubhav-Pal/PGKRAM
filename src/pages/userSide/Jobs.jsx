@@ -44,6 +44,7 @@ const Jobs = () => {
         const response = await axios.get('https://pgrkam-backend.onrender.com/get-jobs');
         setData(response.data['Featured']);
         // console.log(data);
+        console.log(response.data['Featured']);
 
 
 
@@ -148,7 +149,7 @@ const Jobs = () => {
 
         {/* jobs */}
         {Object.values(data).map(jobData => (
-          <JobDisplay jobData={jobData} />
+          <JobDisplay jobData={jobData} key={jobData.key} />
         ))}
 
       </div>

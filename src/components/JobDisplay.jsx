@@ -48,7 +48,7 @@ const JobDisplay = (props) => {
 
 
   const singleJob = props.jobData;
-  // console.log(props.jobData);
+  // console.log(singleJob);
 
   const words = singleJob.about.split(/\s+/);
   const text = words.slice(0, 15).join(' ');
@@ -68,10 +68,10 @@ const JobDisplay = (props) => {
           <div className='ml-10'>{singleJob.location}</div>
         </div>
         <div className='text-[14px]'>{text}...</div>
-      </div>
+      </div>z
 
       <div>
-        <Link to="/apply" target='_blank'>
+        <Link to={`/apply/${singleJob.id}`} target='_blank'>
           <button className='bg-[#4f2ce0] w-4/5 text-white mx-4 px-2 mb-3 rounded-md py-1 '>APPLY</button>
         </Link>
         <button onClick={handleRemove} className='bg-gray-300 w-4/5 mx-4 px-2 py-1  text-white rounded-md '>DON'T RECOMMEND</button>
