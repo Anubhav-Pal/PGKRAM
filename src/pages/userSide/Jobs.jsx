@@ -43,18 +43,18 @@ const Jobs = () => {
       try {
         const response = await axios.get('https://pgrkam-backend.onrender.com/get-jobs');
         setData(response.data['Featured']);
-        // console.log(data);
-
-
-
+        
+        
+        
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-
+    
     fetchData();
   }, [])
-
+  
+  console.log(data);
 
   return (
     <div className='flex m-auto py-4 bg-gray-100'>
