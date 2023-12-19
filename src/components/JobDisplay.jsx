@@ -33,19 +33,38 @@ const JobDisplay = (props) => {
     }
   };
 
+  const generateUniqueLink = () => {
+    // Implement your logic to generate a unique link
+    const link = `https://example.com/${uuidv4()}`;
+    setUniqueLink(link);
+  };
+
+  const openNewWebpage = () => {
+    window.open(uniqueLink, '_blank');
+  };
+
+
+  const singleJob = props.jobData;
+  // console.log(props.jobData);
+
+  const words = singleJob.about.split(/\s+/);
+  const text = words.slice(0, 15).join(' ');
+
+
+
   return (
     <div className='bg-white flex p-4 justify-center items-center my-2 rounded-lg'>
       <Link to='/company' target='_blank'>
-        <div>{props.icon}</div>
+        <div>{singleJob.icon}</div>
       </Link>
 
       <div className='ml-4 w-4/5'>
-        <div className='font-semibold'>{props.position}</div>
+        <div className='font-semibold'>{singleJob.job_title}</div>
         <div className='flex text-[13px]'>
-          <div>{props.company}</div>
-          <div className='ml-10'>{props.medium}</div>
+          <div>{singleJob.company}</div>
+          <div className='ml-10'>{singleJob.location}</div>
         </div>
-        <div className='text-[14px]'>{props.text}</div>
+        <div className='text-[14px]'>{text}...</div>
       </div>
 
       <div>

@@ -1,8 +1,21 @@
-import React from 'react'
+import React ,{useEffect,useState}from 'react'
 import { Chart as ChartJS } from 'chart.js/auto'
 import { Bar, Line } from 'react-chartjs-2'
-
+import axios from 'axios';
 const Insights = () => {
+  const [dataSalary,setDataSalary]=useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://pgrkam-backend.onrender.com/get-average-salary');
+        setDataSalary(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  },[])
+  console.log(dataSalary)
   return (
     <div className='demographics p-10 gap-10 flex flex-col overflow-x-hidden items-center justify-between'>
       <div className=' flex items-center justify-between w-full'>
@@ -15,7 +28,6 @@ const Insights = () => {
             <option value="ML Engineer">ML Engineer</option>
             <option value="Software Engineer">Software Engineer</option>
             <option value="Data Scientist">Data Scientist</option>
-            <option value="Other">Other</option>
           </select>
         </div>
 
