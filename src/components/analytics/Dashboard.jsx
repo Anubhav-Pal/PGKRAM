@@ -6,6 +6,7 @@ const Dashboard = () => {
   const [data, setData] = useState(null)
   const [retention, setRetentionData] = useState(null)
   const [traffic, setTraffic] = useState(null)
+  const [user,setUser]=useState(null)
   useEffect(() => {
     const fetchTrafficData = async () => {
       try {
@@ -34,10 +35,10 @@ const Dashboard = () => {
       }
     };
     fetchRetentionData();
-  }, [])
-  console.log(retention)
-  console.log(data)
-  console.log(traffic)
+  },[])
+  // console.log(retention)
+  // console.log(data)
+  // console.log(traffic)
   return (
     <div className='flex flex-col items-center justify-center gap-10'>
       <div className='flex items-center w-4/5 justify-between m-10 font-medium text-gray-700'>
