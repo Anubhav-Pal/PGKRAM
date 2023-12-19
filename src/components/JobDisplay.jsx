@@ -14,7 +14,7 @@ const JobDisplay = (props) => {
   useEffect(() => {
     const savedJobs = JSON.parse(localStorage.getItem('savedJobs')) || [];
     const isJobSaved = savedJobs.some(savedJob => savedJob && savedJob.id && savedJob.id === props.id);
-  
+
     setIsSaved(isJobSaved);
   }, [props.id, setIsSaved]);
 
@@ -38,7 +38,7 @@ const JobDisplay = (props) => {
 
   const generateUniqueLink = () => {
     // Implement your logic to generate a unique link
-    const link = `https://example.com/${uuidv4()}`; // Replace with your logic
+    const link = `https://example.com/${uuidv4()}`;
     setUniqueLink(link);
   };
 
@@ -46,6 +46,10 @@ const JobDisplay = (props) => {
     window.open(uniqueLink, '_blank');
   };
 
+
+  console.log(props.jobData);
+
+  
   return (
     <div className='bg-white flex p-4 justify-center items-center my-2 rounded-lg'>
       <Link to='/company' target='_blank'>
