@@ -1,10 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { Line } from 'react-chartjs-2'
-
-
+import axios from 'axios';
 const Dashboard = () => {
   const [first, setfirst] = useState('Retention rate');
-
+  const[traffic,setTraffic]=useState(null)
+  useEffect(() => {
+    const fetchTrafficData = async () => {
+      try {
+        const response = await axios.get('https://pgrkam-backend.onrender.com/traffic-data');
+        setTraffic(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchTrafficData();
+  },[])
+  console.log(traffic)
   return (
     <div className='flex flex-col items-center justify-center gap-10'>
       <div className='flex items-center w-4/5 justify-between m-10 font-medium text-gray-700'>
