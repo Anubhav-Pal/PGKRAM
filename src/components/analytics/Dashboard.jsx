@@ -9,6 +9,7 @@ const Dashboard = () => {
   const [retention, setRetentionData] = useState(null)
   const [traffic, setTraffic] = useState(null)
   const [user,setUser]=useState(null)
+  const [options,setOptions]=useState(null)
   useEffect(() => {
     const fetchTrafficData = async () => {
       try {
@@ -37,10 +38,30 @@ const Dashboard = () => {
       }
     };
     fetchRetentionData();
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get('https://pgrkam-backend.onrender.com/user-data');
+        setUser(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchUserData();
+    const fetchOptionsData = async () => {
+      try {
+        const response = await axios.get('https://pgrkam-backend.onrender.com/get-options');
+        setUser(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchOptionsData();
   },[])
-  // console.log(retention)
-  // console.log(data)
-  // console.log(traffic)
+  console.log(options)
+  console.log(user)
+  console.log(retention)
+  console.log(data)
+  console.log(traffic)
   return (
     <div className='flex flex-col items-center justify-center gap-10'>
       <div className='flex items-center w-4/5 justify-between m-10 font-medium text-gray-700'>
