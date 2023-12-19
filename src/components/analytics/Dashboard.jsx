@@ -33,7 +33,7 @@ const Dashboard = () => {
         console.error('Error fetching data:', error);
       }
     };
-    fetchTrafficData();
+    fetchRetentionData();
   },[])
   console.log(retention)
   console.log(data)
