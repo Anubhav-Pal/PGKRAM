@@ -1,7 +1,8 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import RectangleDisplay from './RectangleDisplay'
 import LineDisplay from './LineDisplay'
 import Skill from './Skill'
+import axios from 'axios';
 import CircularProgressBar from './CircularProgressBar'
 const JobDetails = () => {
   const [display,setDisplay]=useState(null)
@@ -9,7 +10,7 @@ const JobDetails = () => {
   const [isApplied, setIsApplied] = useState(false);
   const [userChoice, setUserChoice] = useState(null);
   const [availabilityText, setAvailabilityText] = useState('');
-  const [documentId, setDocumentId] = useState('982023459'); // ID of the document to update / delete 
+  const [documentId, setDocumentId] = useState('3195sdfalrew3'); // ID of the document to update / delete 
   const handleApplyClick = () => {
     // Open the popup
     setIsPopupOpen(true);
@@ -42,8 +43,8 @@ const JobDetails = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://pgrkam-backend.onrender.com//Job-data/Featured/${documentId}`);
-        setDisplay(response)
+        const response = await axios.get(`http://localhost:8080/Job-data/Featured/${documentId}`);
+        setDisplay(response.data)
       } catch (error) {
         console.error('Error fetching data:', error);
       }
