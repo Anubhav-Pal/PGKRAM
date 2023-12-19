@@ -38,26 +38,28 @@ const Questionui = ({ question }) => {
   }, [question]);
 
   return (
-    <div>
-      <div>{question}</div>
+    <div className="flex flex-col items-center">
+      <div className="my-4">{question}</div>
 
-      {/* Live recording on the left */}
-      <div className="flex mt-4">
+      {/* Live recording at the center */}
+      <div className="flex flex-col items-center mt-4">
         <div>
-          <video ref={videoRef} width="400" height="300" controls autoPlay muted></video>
-          {/* Record button */}
-          <button className={`bg-[#ED9017] py-2 px-4 rounded-lg text-white mt-2`} onClick={toggleRecording}>
-            {recording ? 'Stop Recording' : 'Start Recording'}
-          </button>
+          <video ref={videoRef} width="600" height="450" controls autoPlay muted></video>
         </div>
 
-        {/* Preview on the right */}
-        {recordedVideoBlob && (
-          <div className="mt-[-40px] ml-auto flex justify-end ">
-            <video ref={previewVideoRef} width="400" height="300" controls src={URL.createObjectURL(recordedVideoBlob)}></video>
-          </div>
-        )}
+        {/* Record button */}
+        <button className={`bg-[#ED9017] py-2 px-4 rounded-lg text-white mt-2`} onClick={toggleRecording}>
+          {recording ? 'Stop Recording' : 'Start Recording'}
+        </button>
       </div>
+
+      {/* Preview below the live video */}
+      {recordedVideoBlob && (
+        <div className="mt-4">
+          <h3>Preview</h3>
+          <video ref={previewVideoRef} width="600" height="450" controls src={URL.createObjectURL(recordedVideoBlob)}></video>
+        </div>
+      )}
     </div>
   );
 };
