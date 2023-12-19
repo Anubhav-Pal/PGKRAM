@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Line } from 'react-chartjs-2'
+
+import Chart from 'react-apexcharts';
 import axios from 'axios';
 const Dashboard = () => {
   const [first, setfirst] = useState('Retention rate');
