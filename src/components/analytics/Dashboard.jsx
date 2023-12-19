@@ -1,11 +1,11 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Line } from 'react-chartjs-2'
 import axios from 'axios';
 const Dashboard = () => {
   const [first, setfirst] = useState('Retention rate');
-  const [data,setData]=useState(null)
-  const [retention,setRetentionData]=useState(null)
-  const[traffic,setTraffic]=useState(null)
+  const [data, setData] = useState(null)
+  const [retention, setRetentionData] = useState(null)
+  const [traffic, setTraffic] = useState(null)
   useEffect(() => {
     const fetchTrafficData = async () => {
       try {
@@ -34,10 +34,10 @@ const Dashboard = () => {
       }
     };
     fetchRetentionData();
-  },[])
-  // console.log(retention)
-  // console.log(data)
-  // console.log(traffic)
+  }, [])
+  console.log(retention)
+  console.log(data)
+  console.log(traffic)
   return (
     <div className='flex flex-col items-center justify-center gap-10'>
       <div className='flex items-center w-4/5 justify-between m-10 font-medium text-gray-700'>
@@ -67,7 +67,7 @@ const Dashboard = () => {
         </div>
 
       </div>
-      <div  className={`${first === 'Retention rate' ? 'flex' : "hidden"} w-[400px]  gap-10 items-center justify-center`}>
+      <div className={`${first === 'Retention rate' ? 'flex' : "hidden"} w-[400px]  gap-10 items-center justify-center`}>
         <Line
           data={
             {
@@ -83,7 +83,7 @@ const Dashboard = () => {
         <Line
           data={
             {
-              labels: ['male','female'],
+              labels: ['male', 'female'],
               datasets: [{
                 label: "Failure",
                 data: [25, 50, 75],
@@ -95,7 +95,7 @@ const Dashboard = () => {
 
 
       </div>
-      <div  className={`${first === 'Traffic Source' ? 'flex' : "hidden"} w-[400px]  gap-10 items-center justify-center`}>
+      <div className={`${first === 'Traffic Source' ? 'flex' : "hidden"} w-[400px]  gap-10 items-center justify-center`}>
         <Line
           data={
             {
@@ -111,7 +111,7 @@ const Dashboard = () => {
         <Line
           data={
             {
-              labels: ['male','female'],
+              labels: ['male', 'female'],
               datasets: [{
                 label: "Failure",
                 data: [25, 50, 75],
