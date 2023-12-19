@@ -3,6 +3,7 @@ import { Line } from 'react-chartjs-2'
 import axios from 'axios';
 const Dashboard = () => {
   const [first, setfirst] = useState('Retention rate');
+  const [data,setData]=useState(null)
   const[traffic,setTraffic]=useState(null)
   useEffect(() => {
     const fetchTrafficData = async () => {
@@ -14,7 +15,18 @@ const Dashboard = () => {
       }
     };
     fetchTrafficData();
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://pgrkam-backend.onrender.com/get-device');
+        setData(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
   },[])
+  console.log(data)
   console.log(traffic)
   return (
     <div className='flex flex-col items-center justify-center gap-10'>
