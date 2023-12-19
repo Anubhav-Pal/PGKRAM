@@ -4,12 +4,12 @@ import LineDisplay from './LineDisplay'
 import Skill from './Skill'
 import CircularProgressBar from './CircularProgressBar'
 const JobDetails = () => {
-
+  const [display,setDisplay]=useState(null)
     const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isApplied, setIsApplied] = useState(false);
   const [userChoice, setUserChoice] = useState(null);
   const [availabilityText, setAvailabilityText] = useState('');
-
+  const [documentId, setDocumentId] = useState('982023459'); // ID of the document to update / delete 
   const handleApplyClick = () => {
     // Open the popup
     setIsPopupOpen(true);
@@ -39,6 +39,19 @@ const JobDetails = () => {
   const handleOptionChange = (choice) => {
     setUserChoice(choice);
   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`https://pgrkam-backend.onrender.com//Job-data/Featured/${documentId}`);
+        setDisplay(response)
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [])
+  console.log(display)
   return (
    <div  className={`p-16 bg-gray-100 ${isPopupOpen ? 'overflow-hidden' : ''}`}>
 
