@@ -6,6 +6,7 @@ const Dashboard = () => {
   const [data,setData]=useState(null)
   const [retention,setRetentionData]=useState(null)
   const[traffic,setTraffic]=useState(null)
+  const [user,setUser]=useState(null)
   useEffect(() => {
     const fetchTrafficData = async () => {
       try {
@@ -34,7 +35,17 @@ const Dashboard = () => {
       }
     };
     fetchRetentionData();
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/user-data');
+        setUser(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchUserData();
   },[])
+  console.log(user)
   console.log(retention)
   console.log(data)
   console.log(traffic)
