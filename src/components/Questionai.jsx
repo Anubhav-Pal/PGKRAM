@@ -3,8 +3,8 @@ import Questionui from './Questionui'
 
 const Questionai = () => {
   return (
-    <div>
-        <div>
+    <div className='flex flex-col justify-center items-center my-10 '>
+        <div className='w-[80vw] bg-white shadow-2xl p-10'>
             <div>
                 Skip Question
             </div>

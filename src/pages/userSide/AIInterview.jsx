@@ -21,7 +21,7 @@ const AIInterview = () => {
     setShowQuestionComponent(true);
   };
 
-  const skillsFromBackend = ['python', 'java', 'javascript', 'react', 'nodejs'];
+  const skillsFromBackend = ['HR', 'Spoken English', 'DBMS', 'Financial Accounting', 'Marketing Management','Front End' , 'Back End', 'Android Development','Designing','Machine Learning','SQL','Databases'];
 
   return (
     <div className='flex flex-col'>
@@ -29,7 +29,7 @@ const AIInterview = () => {
         <div className='m-10 h-[50vh] shadow-2xl p-10'>
           <div className='text-gray-600 my-8'>Choose your skills, and let our AI generate tailored questions</div>
 
-          <div>
+          <div className='flex'>
             {skillsFromBackend.map((skill, index) => (
               <Skillai
                 key={index}
