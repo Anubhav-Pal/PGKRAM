@@ -12,40 +12,73 @@ const ViewProfile = () => {
   const [showProfile, setShowProfile] = useState(false)
   const [updateDetails, setupdateDetails] = useState(false);
   const [resumeUploaded, setResumeUploaded] = useState(false);
+  const [qrCodeScannerVisible, setQrCodeScannerVisible] = useState(false);
 
-  const handleUploadResume = (file) => {
-    setSelectedResume(file);
-    setShowUploadModal(false);
-    setResumeUploaded(true); // Set resumeUploaded to true when a resume is uploaded
-    // Perform additional actions if needed
-  };
 
-  const handleUpdate = () => {
-    setShowProfile(false);
-    setupdateDetails(true);
-  };
+const userId='123';
 
-  const handleEditprofile = () => {
-    setShowProfile(true);
-    setupdateDetails(false);
-  };
 
-  const handleResume = () => {
-    setShowUploadModal(true);
-    console.log('upload popup');
-  };
+const handleScan = (data) => {
+  if (data) {
+    setQrCodeScannerVisible(false);
+    handleDownloadResume();
+    console.log('Resume downloaded');
+  }
+};
 
-  const handleQrCode = () => {
-    // Check if a resume is selected
-    if (selectedResume) {
-      setQr(true);
-      console.log('qr display true');
-    } else {
-      // Handle the case where no resume is selected
-      // You can show a message or take other actions
-      console.log('Please upload a resume first');
-    }
-  };
+const handleError = (err) => {
+  console.error(err);
+};
+
+const toggleQrCodeScanner = () => {
+  setQrCodeScannerVisible(!qrCodeScannerVisible);
+};
+
+const handleUploadResume = (file) => {
+  setSelectedResume(file);
+  setShowUploadModal(false);
+  setResumeUploaded(true); // Set resumeUploaded to true when a resume is uploaded
+  // Perform additional actions if needed
+};
+
+const handleUpdate = () => {
+  setShowProfile(false);
+  setupdateDetails(true);
+};
+
+const handleEditprofile = () => {
+  setShowProfile(true);
+  setupdateDetails(false);
+};
+
+const handleResume = () => {
+  setShowUploadModal(true);
+  console.log('upload popup');
+};
+
+const handleQrCode = () => {
+  // Check if a resume is selected
+  if (selectedResume) {
+    handleDownloadResume(); // Trigger download when QR code is scanned
+    console.log('Resume downloaded');
+  } else {
+    // Handle the case where no resume is selected
+    // You can show a message or take other actions
+    console.log('Please upload a resume first');
+  }
+};
+
+const handleDownloadResume = () => {
+  if (selectedResume) {
+    const downloadUrl = URL.createObjectURL(selectedResume);
+    const a = document.createElement('a');
+    a.href = downloadUrl;
+    a.download = 'resume.pdf';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+};
 
   return (
     <div className='m-10 gap-2 flex flex-col'>
@@ -78,18 +111,17 @@ const ViewProfile = () => {
         </div>
       )}
 
-      {/* QR Code Popup */}
-      {qrcode && (
+{qrCodeScannerVisible && (
         <div className='fixed inset-0 flex items-center justify-center bg-white bg-opacity-40'>
           <div className='bg-white w-2/5 h-2/5 flex m-auto flex-col justify-evenly items-center p-6 rounded-md relative'>
             <button
               className='absolute top-2 right-2 text-gray-700 text-lg cursor-pointer'
-              onClick={() => setQr(false)}
+              onClick={toggleQrCodeScanner}
             >
               &#10005;
             </button>
-            <h2 className='font-medium text-lg mb-4'>QR Code</h2>
-            <QrCode value='URL or data to be encoded' size={200} />
+            <h2 className='font-medium text-lg mb-4'>QR Code Scanner</h2>
+            <QrCode value={userId} size={200} />
           </div>
         </div>
       )}
@@ -120,14 +152,14 @@ const ViewProfile = () => {
           <button
             onClick={handleResume}
             className={`rounded-sm px-3 py-1 my-2 text-white uppercase font-semibold text-xs ${
-              resumeUploaded ? 'bg-green-500' : 'bg-[#ED9017]'
+              resumeUploaded ? 'bg-green-600' : 'bg-[#ED9017]'
             }`}
           >
             {resumeUploaded ? 'Resume Uploaded' : 'Upload resume'}
           </button>
-          <button onClick={handleQrCode}>
-            <FaQrcode className='w-6 h-6 rounded-sm text-orange-400 ' />
-          </button>
+          <button onClick={toggleQrCodeScanner}>
+          <FaQrcode className='w-6 h-6 rounded-sm text-orange-400 ' />
+        </button>
         </div>
       </div>
 
