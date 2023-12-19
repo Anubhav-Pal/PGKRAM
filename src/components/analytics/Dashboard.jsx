@@ -4,6 +4,7 @@ import axios from 'axios';
 const Dashboard = () => {
   const [first, setfirst] = useState('Retention rate');
   const [data,setData]=useState(null)
+  const [retention,setRetentionData]=useState(null)
   const[traffic,setTraffic]=useState(null)
   useEffect(() => {
     const fetchTrafficData = async () => {
@@ -23,9 +24,18 @@ const Dashboard = () => {
         console.error('Error fetching data:', error);
       }
     };
-
     fetchData();
+    const fetchRetentionData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/get-retention');
+        setRetentionData(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchTrafficData();
   },[])
+  console.log(retention)
   console.log(data)
   console.log(traffic)
   return (
