@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { FaQrcode } from 'react-icons/fa';
 import { Line } from 'react-chartjs-2'
-// import ProfileForm from './profileForm';
-// import Profile from '../../../../new-frontend/src/pages/userSide/Profile';
+import QrCode from 'qrcode.react'; 
 import ProfileForm from './ProfileForm';
 
 
@@ -11,24 +10,90 @@ const ViewProfile = () => {
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [selectedResume, setSelectedResume] = useState(null);
   const [showProfile, setShowProfile] = useState(false)
-  const [updateDetails, setupdateDetails] = useState(false)
+  const [updateDetails, setupdateDetails] = useState(false);
+  const [resumeUploaded, setResumeUploaded] = useState(false);
 
   const handleUploadResume = (file) => {
     setSelectedResume(file);
     setShowUploadModal(false);
+    setResumeUploaded(true); // Set resumeUploaded to true when a resume is uploaded
     // Perform additional actions if needed
   };
 
-  const handleUpdate=()=>{
+  const handleUpdate = () => {
     setShowProfile(false);
     setupdateDetails(true);
-  }
-  const handleEditprofile=()=>{
+  };
+
+  const handleEditprofile = () => {
     setShowProfile(true);
     setupdateDetails(false);
-  }
+  };
+
+  const handleResume = () => {
+    setShowUploadModal(true);
+    console.log('upload popup');
+  };
+
+  const handleQrCode = () => {
+    // Check if a resume is selected
+    if (selectedResume) {
+      setQr(true);
+      console.log('qr display true');
+    } else {
+      // Handle the case where no resume is selected
+      // You can show a message or take other actions
+      console.log('Please upload a resume first');
+    }
+  };
+
   return (
     <div className='m-10 gap-2 flex flex-col'>
+       {showUploadModal && (
+        <div className='fixed inset-0 flex items-center justify-center bg-black bg-opacity-70'>
+          <div className='bg-white w-2/5 h-2/5 flex m-auto flex-col justify-evenly items-center p-6 rounded-md relative'>
+            <button
+              className='absolute top-2 right-2 text-gray-700 text-lg cursor-pointer'
+              onClick={() => setShowUploadModal(false)}
+            >
+              &#10005;
+            </button>
+            <h2 className='font-medium text-lg mb-4'>Upload Resume</h2>
+            <input
+              type='file'
+              onChange={(e) => handleUploadResume(e.target.files[0])}
+              className='mb-4'
+            />
+            {resumeUploaded ? (
+              <span className='text-green-500 font-medium'>Resume uploaded!</span>
+            ) : (
+              <button
+                onClick={() => setShowUploadModal(false)}
+                className='bg-gray-500 text-white px-4 py-2 rounded-md'
+              >
+                Cancel
+              </button>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* QR Code Popup */}
+      {qrcode && (
+        <div className='fixed inset-0 flex items-center justify-center bg-white bg-opacity-40'>
+          <div className='bg-white w-2/5 h-2/5 flex m-auto flex-col justify-evenly items-center p-6 rounded-md relative'>
+            <button
+              className='absolute top-2 right-2 text-gray-700 text-lg cursor-pointer'
+              onClick={() => setQr(false)}
+            >
+              &#10005;
+            </button>
+            <h2 className='font-medium text-lg mb-4'>QR Code</h2>
+            <QrCode value='URL or data to be encoded' size={200} />
+          </div>
+        </div>
+      )}
+
       <div className='progress-bar flex w-1/2 gap-1 items-center justify-start'>
         <div className='bg-gray-300 w-16 h-2'></div>
         <div className='bg-green-600 w-16 h-2'></div>
@@ -52,8 +117,15 @@ const ViewProfile = () => {
         </div>
         <div className='flex gap-1 items-center justify-between'>
           <button onClick={handleEditprofile} className=' rounded-sm bg-[#ED9017] px-3 py-1 my-2 text-white uppercase font-semibold text-xs'>Edit profile</button>
-          <button onClick={() => setShowUploadModal(true)} className=' rounded-sm bg-[#ED9017] px-3 py-1 my-2 text-white uppercase font-semibold text-xs'>Upload resume</button>
-          <button onClick={() => setQr(true)}>
+          <button
+            onClick={handleResume}
+            className={`rounded-sm px-3 py-1 my-2 text-white uppercase font-semibold text-xs ${
+              resumeUploaded ? 'bg-green-500' : 'bg-[#ED9017]'
+            }`}
+          >
+            {resumeUploaded ? 'Resume Uploaded' : 'Upload resume'}
+          </button>
+          <button onClick={handleQrCode}>
             <FaQrcode className='w-6 h-6 rounded-sm text-orange-400 ' />
           </button>
         </div>
@@ -143,32 +215,6 @@ const ViewProfile = () => {
 
           </div>
         </div>
-
-        {/* Check if the upload modal should be visible */}
-        {showUploadModal && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70">
-            <div className="bg-white w-2/5 h-2/5 flex m-auto flex-col justify-evenly items-center p-6 rounded-md relative">
-              <button
-                className="absolute top-2 right-2 text-gray-700 text-lg cursor-pointer"
-                onClick={() => setShowUploadModal(false)}
-              >
-                &#10005;
-              </button>
-              <h2 className="font-medium text-lg mb-4">Upload Resume</h2>
-              <input
-                type="file"
-                onChange={(e) => handleUploadResume(e.target.files[0])}
-                className="mb-4"
-              />
-              <button
-                onClick={() => setShowUploadModal(false)}
-                className="bg-gray-500 text-white px-4 py-2 rounded-md"
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        )}
 
         <div className="dream-job bg-gray-100 rounded-md p-3 flex flex-col gap-2">
           <h1 className='font-medium text-lg'>Career path</h1>
