@@ -27,7 +27,7 @@ const Dashboard = () => {
     fetchData();
     const fetchRetentionData = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/get-retention');
+        const response = await axios.get('https://pgrkam-backend.onrender.com/get-retention');
         setRetentionData(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
