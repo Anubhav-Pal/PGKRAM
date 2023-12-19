@@ -59,7 +59,7 @@ const ViewProfile = () => {
         </div>
       </div>
 
-      <div className={`${showProfile ? 'flex' : 'hidden'} shadow profile-form`}>
+      <div className={`${showProfile ? 'flex' : 'hidden'} profile-form`}>
         <ProfileForm />
         {/* <button onClick={handleUpdate} className='rounded-sm bg-[#ED9017] px-3 py-1 my-2 text-white uppercase font-semibold text-xs'>Update</button> */}
       </div>
