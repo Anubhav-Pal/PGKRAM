@@ -43,7 +43,7 @@ const JobDetails = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/Job-data/Featured/${documentId}`);
+        const response = await axios.get(`https://pgrkam-backend.onrender.com/Job-data/Featured/${documentId}`);
         setDisplay(response.data)
       } catch (error) {
         console.error('Error fetching data:', error);
