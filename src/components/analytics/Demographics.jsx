@@ -1,8 +1,34 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { Bar } from 'react-chartjs-2'
-
+import axios from 'axios';
 const Demographics = () => {
   const [first, setfirst] = useState('agengender');
+  const [Genderdata,setGenderData]=useState(null);
+  const [Locationdata,setLocationData]=useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://pgrkam-backend.onrender.com/gender-data');
+        setGenderData(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    const fetchLocationData = async () => {
+      try {
+        const response = await axios.get('https://pgrkam-backend.onrender.com/location-data');
+        setGenderData(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+    fetchLocationData();
+  },[])
+console.log(Genderdata)
+console.log(Locationdata)
   return (
     <div className='flex flex-col items-center justify-center gap-10'>
       <div className='flex items-center w-4/5 justify-between m-10 font-medium text-gray-700'>
