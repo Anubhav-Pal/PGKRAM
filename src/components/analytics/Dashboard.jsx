@@ -1,11 +1,11 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Line } from 'react-chartjs-2'
 import axios from 'axios';
 const Dashboard = () => {
   const [first, setfirst] = useState('Retention rate');
-  const [data,setData]=useState(null)
-  const [retention,setRetentionData]=useState(null)
-  const[traffic,setTraffic]=useState(null)
+  const [data, setData] = useState(null)
+  const [retention, setRetentionData] = useState(null)
+  const [traffic, setTraffic] = useState(null)
   const [user,setUser]=useState(null)
   const [options,setOptions]=useState(null)
   useEffect(() => {
@@ -89,7 +89,7 @@ const Dashboard = () => {
         </div>
 
       </div>
-      <div  className={`${first === 'Retention rate' ? 'flex' : "hidden"} w-[400px]  gap-10 items-center justify-center`}>
+      <div className={`${first === 'Retention rate' ? 'flex' : "hidden"} w-[400px]  gap-10 items-center justify-center`}>
         <Line
           data={
             {
@@ -105,7 +105,7 @@ const Dashboard = () => {
         <Line
           data={
             {
-              labels: ['male','female'],
+              labels: ['male', 'female'],
               datasets: [{
                 label: "Failure",
                 data: [25, 50, 75],
@@ -117,7 +117,7 @@ const Dashboard = () => {
 
 
       </div>
-      <div  className={`${first === 'Traffic Source' ? 'flex' : "hidden"} w-[400px]  gap-10 items-center justify-center`}>
+      <div className={`${first === 'Traffic Source' ? 'flex' : "hidden"} w-[400px]  gap-10 items-center justify-center`}>
         <Line
           data={
             {
@@ -133,7 +133,7 @@ const Dashboard = () => {
         <Line
           data={
             {
-              labels: ['male','female'],
+              labels: ['male', 'female'],
               datasets: [{
                 label: "Failure",
                 data: [25, 50, 75],
