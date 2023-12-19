@@ -11,7 +11,6 @@ const ProfileForm = () => {
           <div className='flex flex-col'>
 
             <div>
-
               <div className='p-5 flex w-full items-start justify-between pr-10 shadow'>
                 <div className='w-1/2'>
                   <h1 className='font-medium text-md'>About</h1>
