@@ -5,6 +5,7 @@ import User from './pages/userSide/User'
 import Analytics from './pages/Analytics'
 import ApplyJob from './pages/userSide/ApplyJob'
 import Company from './pages/userSide/Company'
+import JobDetails from './components/JobDetails'
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
           <Route path='/user' element={<User />} />
           <Route path='/analytics' element={<Analytics />} />
           <Route path='/apply' element={<ApplyJob/>}/>
+          <Route path='/apply/:id' element={<JobDetails/>}/>
           <Route path='/company' element={<Company/>}/>
         </Routes>
       </Router>
