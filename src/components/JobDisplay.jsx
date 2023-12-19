@@ -38,7 +38,7 @@ const JobDisplay = (props) => {
 
   const generateUniqueLink = () => {
     // Implement your logic to generate a unique link
-    const link = `https://example.com/${uuidv4()}`; // Replace with your logic
+    const link = `https://example.com/${uuidv4()}`; 
     setUniqueLink(link);
   };
 
