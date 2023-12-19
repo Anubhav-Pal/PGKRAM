@@ -4,6 +4,7 @@ import Insights from '../components/analytics/Insights';
 import Dashboard from '../components/analytics/Dashboard';
 import JobSuccess from '../components/analytics/JobSuccess';
 import Navbar from '../components/Navbar';
+import FirebaseAnalyticsTest from '../components/analytics/FirebaseAnalyticsTest';
 
 const Analytics = () => {
   const [activeButton, setActiveButton] = useState('dashboard');
@@ -55,6 +56,14 @@ const Analytics = () => {
             <div className="mt-1 rounded-2xl bg-violet-500 h-1 w-4"></div>
           )}
         </div>
+        <div className={`relative group  flex flex-col items-center`}>
+          <button className={`hover:text-gray-900`} onClick={() => handleButtonClick('FirebaseAnalyticsTest')}>
+          FirebaseAnalyticsTest
+          </button>
+          {activeButton === 'FirebaseAnalyticsTest' && (
+            <div className="mt-1 rounded-2xl bg-violet-500 h-1 w-4"></div>
+          )}
+        </div>
       </div>
 
       {/* Render content based on the active button */}
@@ -63,6 +72,7 @@ const Analytics = () => {
         {activeButton === 'demographic' && <Demographics />}
         {activeButton === 'jobSuccess' && <JobSuccess />}
         {activeButton === 'salaryInsights' && <Insights />}
+        {activeButton === 'FirebaseAnalyticsTest' && <FirebaseAnalyticsTest />}
       </div>
     </div>
   );
