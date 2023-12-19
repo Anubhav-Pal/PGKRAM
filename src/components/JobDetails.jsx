@@ -1,41 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React,{useState} from 'react'
 import RectangleDisplay from './RectangleDisplay'
 import LineDisplay from './LineDisplay'
 import Skill from './Skill'
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
-
 import CircularProgressBar from './CircularProgressBar'
 import Navbar from './Navbar'
 const JobDetails = () => {
-  const [data, setData] = useState({});
 
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isApplied, setIsApplied] = useState(false);
   const [userChoice, setUserChoice] = useState(null);
   const [availabilityText, setAvailabilityText] = useState('');
-
-
-  const { id } = useParams();
-
-
-  // fetching the data
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // const response = await axios.get(`https://pgrkam-backend.onrender.com/get-jobs/${id}`);
-        const response = await axios.get(`https://pgrkam-backend.onrender.com/get-jobs/${id}`);
-        setData(response.data['Featured']);
-        setData(allJobs);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, [])
-
-  console.log(id);
 
   const handleApplyClick = () => {
     // Open the popup
@@ -66,6 +40,19 @@ const JobDetails = () => {
   const handleOptionChange = (choice) => {
     setUserChoice(choice);
   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`https://pgrkam-backend.onrender.com/Job-data/Featured/${documentId}`);
+        setDisplay(response.data)
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [])
+  console.log(display)
   return (
     <div>
       <Navbar />

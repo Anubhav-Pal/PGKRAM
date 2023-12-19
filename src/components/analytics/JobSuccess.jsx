@@ -3,6 +3,37 @@ import { Chart as ChartJS } from 'chart.js/auto'
 import { Bar } from 'react-chartjs-2'
 
 const jobSuccess = () => {
+  const [retention,setRetentionData]=useState(null)
+  useEffect(() => {
+    const fetchTrafficData = async () => {
+      try {
+        const response = await axios.get('https://pgrkam-backend.onrender.com/traffic-data');
+        setTraffic(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchTrafficData();
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('https://pgrkam-backend.onrender.com/get-device');
+        setData(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+    const fetchRetentionData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/get-retention');
+        setRetentionData(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchRetentionData();
+  },[])
+  console.log(retention)
   return (
     <div className='demographics p-10 gap-10 flex flex-col overflow-x-hidden items-center justify-between'>
       <div className=' flex items-center justify-between w-full'>
