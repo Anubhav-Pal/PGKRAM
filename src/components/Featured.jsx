@@ -2,10 +2,10 @@ import React from 'react'
 
 const Featured = () => {
   return (
-    <div className='mt-8'>
+    <div className='mt-8 bg-white p-10'>
         
         <div className='flex  items-center'>
-            <div>icon</div>
+            <div></div>
             <div className='ml-4'>
                 <div className='font-semibold text-[20px]'>Senior UX Designer</div>
                 <div className='text-[15px] mt-[-4px] text-gray-700'>at Facebook</div>
@@ -18,7 +18,9 @@ const Featured = () => {
         </div>
 
         <div>
-        Here at Velstar, we don't just make websites, we create exceptional digital experiences that consumers lov a proven track record in delivering outstanding eCommerce solutions and driving sales for our clients.
+       
+
+        The role of a Senior UX Designer at Facebook is pivotal in shaping and enhancing user experiences across the platform. With a focus on innovation and user-centric design, the Senior UX Designer leads strategic initiatives, collaborating with cross-functional teams to create intuitive and visually compelling interfaces. They drive design thinking processes, conduct user research, and leverage data insights to inform design decisions. Responsible for mentoring junior designers, the role demands a deep understanding of user behavior and evolving design trends. The Senior UX Designer plays a crucial role in elevating Facebook's design standards, ensuring a seamless and delightful experience for millions of users worldwide.
         </div>
     </div>
   )

@@ -65,7 +65,7 @@ const JobDisplay = (props) => {
           <div className='ml-10'>{singleJob.location}</div>
         </div>
         <div className='text-[14px]'>{text}...</div>
-      </div>z
+      </div>
 
       <div>
         <Link to={`/apply/${singleJob.id}`} target='_blank'>
