@@ -4,6 +4,7 @@ import Chart from "react-apexcharts";
 import Navbar from "../Navbar";
 
 const UserDemographics = () => {
+  const [button, setButton] = useState(true)
   const [user, setUser] = useState(null);
   const [options, setOptions] = useState({});
   const [minAge, setMinAge] = useState();
@@ -98,6 +99,7 @@ const UserDemographics = () => {
   console.log(userdata);
 
   const handleFilterClick = () => {
+    setButton(false);
     const result = getUsersCountByCriteria(
       userdata,
       minAge,
@@ -109,31 +111,31 @@ const UserDemographics = () => {
     );
     console.log("Filtered user count", result);
     setChartData({
-        options: {
-          chart: {
-            id: "education-chart",
-          },
-          xaxis: {
-            categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "August", "Sept", "Oct", "Nov", "Dec"]
-
-
-
-
-
-            , // Provide default empty array or the appropriate initial value
-          },
-          title: {
-            // text: 'Education Distribution',
-            align: "center",
-          },
+      options: {
+        chart: {
+          id: "education-chart",
         },
-        series: [
-          {
-            name: "Success",
-            data: result, // Provide default empty array or the appropriate initial value
-          },
-        ],
-      })
+        xaxis: {
+          categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "August", "Sept", "Oct", "Nov", "Dec"]
+
+
+
+
+
+          , // Provide default empty array or the appropriate initial value
+        },
+        title: {
+          // text: 'Education Distribution',
+          align: "center",
+        },
+      },
+      series: [
+        {
+          name: "Success",
+          data: result, // Provide default empty array or the appropriate initial value
+        },
+      ],
+    })
   };
 
   function getUsersCountByCriteria(
@@ -213,92 +215,102 @@ const UserDemographics = () => {
     return result;
   }
 
-//   cosnt newResult=result
+  //   cosnt newResult=result
 
   return (
 
     <div>
-<Navbar/>
-<div className="flex flex-col items-center">
-      
-      <div className="my-4">
-        <label className="mr-2">Min Age:</label>
-        <input type="number" value={minAge} onChange={handleMinAgeChange} />
-        <label className="ml-2">Max Age:</label>
-        <input type="number" value={maxAge} onChange={handleMaxAgeChange} />
-        <p>Min Age: {minAge}</p>
-        <p>Max Age: {maxAge}</p>
-      </div>
+      <Navbar />
+      <div className="flex flex-col p-10">
 
-      <div className="my-4">
-        <label className="mr-2">Gender</label>
-        <select value={selectedGender} onChange={handleGenderChange}>
-          <option value="">Select Gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-          <option value="transgender">Transgender</option>
-        </select>
-        <p>Selected Gender: {selectedGender}</p>
-      </div>
+        <div className="my-4 border shadow p-4 rounded-md">
+          <label className="mr-2 mt-2">Min Age:</label>
+          <input type="number" className="border" value={minAge} onChange={handleMinAgeChange} />
+          <label className="ml-2 mt-2">Max Age:</label>
+          <input type="number" className="border ml-2 mt-2" value={maxAge} onChange={handleMaxAgeChange} />
+          <p className="mt-2">Min Age: <span className="mt-2 bg-green-400 rounded-md p-[0.5px]"> {minAge}</span></p>
+          <p className="mt-2">Max Age: <span className="bg-green-400 rounded-md p-[0.5px]"> {maxAge}</span></p>
+        </div>
 
-      <div className="my-4">
-        <label className="mr-2">Education:</label>
-        <select value={selectedEducation} onChange={handleEducationChange}>
-          <option value="">Select Education</option>
-          <option value="10th pass">10th Pass</option>
-          <option value="12th pass">12th Pass</option>
-          <option value="graduate">Graduate</option>
-          <option value="post graduate">Postgraduate</option>
-        </select>
-        <p>Selected Education: {selectedEducation}</p>
-      </div>
+        <div className="my-4 border shadow p-4 rounded-md">
+          <label className="mr-2">Gender</label>
+          <select value={selectedGender} className="border" onChange={handleGenderChange}>
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="transgender">Transgender</option>
+          </select>
+          <p>Selected Gender: <span className="bg-green-400 rounded-md p-[2px]"> {selectedGender}</span></p>
+        </div>
 
-      <div className="my-4">
-        <label className="mr-2">Industry:</label>
-        <select
-          value={selectedIndustries}
-          onChange={handleIndustryChange}
-          multiple
-        >
-          <option value="computerscience">Computer Science</option>
-          <option value="it">IT</option>
-          <option value="bussiness">business</option>
-          <option value="electrical">Electrical</option>
-          <option value="mechanical">mechanical</option>
-          <option value="information security">Information Security</option>
-        </select>
-        <p>Selected Industries: {selectedIndustries.join(", ")}</p>
-      </div>
+        <div className="my-4 border shadow p-4 rounded-md">
+          <label className="mr-2">Education:</label>
+          <select value={selectedEducation} className="border" onChange={handleEducationChange}>
+            <option value="">Select Education</option>
+            <option value="10th pass">10th Pass</option>
+            <option value="12th pass">12th Pass</option>
+            <option value="graduate">Graduate</option>
+            <option value="post graduate">Postgraduate</option>
+          </select>
+          <p>Selected Education: {selectedEducation}</p>
+        </div>
 
-      <div className="my-4">
-        <label className="mr-2">Location:</label>
-        <select value={selectedLocation} onChange={handleLocationChange}>
-          <option value="">Select Location</option>
-          <option value="delhi">Delhi</option>
-          <option value="bengaluru">Bengaluru</option>
-          <option value="chennai">Chennai</option>
-          <option value="meerut">Meerut</option>
-          <option value="agra">Agra</option>
-        </select>
+        <div className="my-4 border shadow p-4 rounded-md">
+          <div className="flex">
+            <div>
 
-        <p>Selected Location: {selectedLocation}</p>
-      </div>
+              <label className="mr-2">Industry:</label>
+            </div>
+            <div>
 
-      <div>
-        <button onClick={handleFilterClick}>Apply Filter</button>
-      </div>
+              <select
+              className="border"
+                value={selectedIndustries}
+                onChange={handleIndustryChange}
+                multiple
+              >
+                <option value="computerscience">Computer Science</option>
+                <option value="it">IT</option>
+                <option value="bussiness">business</option>
+                <option value="electrical">Electrical</option>
+                <option value="mechanical">mechanical</option>
+                <option value="information security">Information Security</option>
+              </select>
+            </div>
+          </div>
+          <p className="mt-3">Selected Industries: {selectedIndustries.join(", ")}</p>
+        </div>
 
-      <div className="shadow flex items-center justify-center">
-        <div className="p-4">
-          <Chart
-            options={chartData.options}
-            series={chartData.series}
-            type="bar"
-            width={700}
-          />
+        <div className="my-4 border shadow p-4 rounded-md">
+          <label className="mr-2">Location:</label>
+          <select value={selectedLocation} onChange={handleLocationChange}>
+            <option value="">Select Location</option>
+            <option value="delhi">Delhi</option>
+            <option value="bengaluru">Bengaluru</option>
+            <option value="chennai">Chennai</option>
+            <option value="meerut">Meerut</option>
+            <option value="agra">Agra</option>
+          </select>
+
+          <p>Selected Location: {selectedLocation}</p>
+        </div>
+
+        <div>
+          <button onClick={handleFilterClick} type="submit" className={` ${button? '':'disabled'} rounded-sm bg-[#ED9017] w-44 px-3 py-1 my-6 text-white font-semibold text-xs`}>Apply Filter</button>
+
+        </div>
+
+        <div className=" flex items-center justify-center border shadow p-4 rounded-md">
+          <div className=" border shadow p-4 rounded-md">
+            <Chart
+              options={chartData.options}
+              series={chartData.series}
+              type="bar"
+              width={700}
+            />
+          </div>
         </div>
       </div>
-    </div>
     </div>
   );
 };
