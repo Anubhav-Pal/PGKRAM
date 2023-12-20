@@ -92,6 +92,26 @@ const HomePage = () => {
       }
     };
     fetchSuccessData();
+    const IncrementFailure = async () => {
+      try {
+    
+        const response = await axios.put(`https://pgrkam-backend.onrender.com/increment-failure`);
+  
+        console.log('Response from Flask:', response.data);
+      } catch (error) {
+        console.error('Error updating data in Flask:', error);
+      }
+    };
+    const DecrementFailure = async () => {
+      try {
+    
+        const response = await axios.put(`https://pgrkam-backend.onrender.com/decrement-failure`);
+  
+        console.log('Response from Flask:', response.data);
+      } catch (error) {
+        console.error('Error updating data in Flask:', error);
+      }
+    };
   }, []);
   console.log(success)
   return (
