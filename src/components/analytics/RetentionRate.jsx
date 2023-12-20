@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from '../Navbar';
 import Chart from 'react-apexcharts';
+import Select from 'react-select';
 
 const Dashboard = () => {
   const [chartData, setChartData] = useState({
