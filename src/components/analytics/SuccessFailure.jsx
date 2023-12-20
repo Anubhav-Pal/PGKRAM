@@ -3,6 +3,39 @@ import Chart from 'react-apexcharts';
 import Navbar from '../Navbar';
 import axios from 'axios';
 
+
+
+
+// / Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { logEvent } from 'firebase/analytics';
+// import { useEffect } from 'react'
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBtN5KQkpsXzN1zqvQVt1djUKLrsP_uDP8",
+  authDomain: "pgrkam-117c0.firebaseapp.com",
+  databaseURL: "https://pgrkam-117c0-default-rtdb.firebaseio.com",
+  projectId: "pgrkam-117c0",
+  storageBucket: "pgrkam-117c0.appspot.com",
+  messagingSenderId: "980934921200",
+  appId: "1:980934921200:web:126d7d851381bc022b2b35",
+  measurementId: "G-MFTHEZYJ0C"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+// function App() {
+
+  
+
 const SuccessFailure = () => {
     const [SFdata, setSFdata] = useState({});
     const [chartData, setChartData] = useState({
@@ -57,6 +90,14 @@ const SuccessFailure = () => {
             ],
         }));
     }, [SFdata]);
+
+
+    useEffect(() => {
+        console.log(analytics); // Check if 'logEvent' is present
+        logEvent(analytics, 'component_mount', {
+          componentName: 'SuccessFailure', // Replace with your actual component name
+        });
+      }, []);
 
     return (
         <div>
