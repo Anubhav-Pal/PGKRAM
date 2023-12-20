@@ -7,6 +7,7 @@ import axios from 'axios';
 import  {useDropzone}  from 'react-dropzone';
 const HomePage = () => {
   const [data,setData]=useState(null);
+  const [success,setSuccess]=useState(null);
   const [formData, setFormData] = useState({
     name: 'Viraaj',
     email: 'viraajpathariya@gmail.com',
@@ -81,32 +82,18 @@ const HomePage = () => {
     }
   };
   // The below function is used to fetch data from mongodb and store that data in the "data variable"
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get('https://pgrkam-backend.onrender.com');
-  //       setData(response.data);
-  //     } catch (error) {
-  //       console.error('Error fetching data:', error);
-  //     }
-  //   };
-
-  //   fetchData();
-  //   const checkIsMobile = () => {
-  //     setIsMobile(window.innerWidth<= 768);
-  //   };
-
-  //   // Attach the event listener for window resize
-  //   window.addEventListener('resize', checkIsMobile);
-
-  //   // Initial check
-  //   checkIsMobile();
-
-  //   // Clean up the event listener when the component unmounts
-  //   return () => {
-  //     window.removeEventListener('resize', checkIsMobile);
-  //   };
-  // }, []);
+  useEffect(() => {
+    const fetchSuccessData = async () => {
+      try {
+        const response = await axios.get('https://pgrkam-backend.onrender.com/get-success');
+        setSuccess(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchSuccessData();
+  }, []);
+  console.log(success)
   return (
     <div>
       <Navbar />
