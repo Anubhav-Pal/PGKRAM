@@ -146,6 +146,10 @@ const UserDemo = () => {
         <div>
             <Navbar />
             <div className='p-10'>
+        <h1 className='font-medium'>User Demographics</h1>
+        <h1 className='font-medium text-gray-400 text-sm'>Control and analyse your data in the most convenient way</h1>
+      </div>
+            <div className='px-10'>
                 <label className='border p-2 block'>Select an option:</label>
                 <select
                     className='border p-2 mt-2'

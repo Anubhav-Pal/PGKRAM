@@ -1,5 +1,6 @@
 import React from 'react'
 import logo from "../assets/Logo.svg"
+import { Link } from 'react-router-dom'
 const Navbar = () => {
   return (
     <>
@@ -23,7 +24,7 @@ const Navbar = () => {
             <li className='mx-3'>HOME</li>
             <li className='mx-3'>ABOUT US</li>
             <li className='mx-3'>CONTACT US</li>
-            <li className='mx-3'>ADMIN LOGIN</li>
+            <li className='mx-3'><Link to='/analytics'>ADMIN LOGIN</Link></li>
            </ul></div>
         </div>
 

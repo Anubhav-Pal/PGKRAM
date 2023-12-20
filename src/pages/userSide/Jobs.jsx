@@ -154,8 +154,9 @@ const Jobs = () => {
       </div>
 
       {/* 2nd col */}
-      <div className='w-1/5 m-auto'>
-        <Featured  />
+
+      <div className='w-1/4 m-auto bg-white'>
+       <div className='absolute top-60 mr-8'> <Featured  /></div>
       </div>
     </div>
   )
