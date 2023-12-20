@@ -97,32 +97,37 @@ const Analytics = () => {
         </div>
         <div className='flex flex-col justify-between gap-5 mt-10'>
           <div className='flex items-center justify-between my-14'>
-            <Link to='/analytics/retention-rate' className='bg-white w-2/12 text-center text-gray-700 p-8 font-medium rounded-md border-purple-600 border-2'>
+            <Link to='/analytics/retention-rate' className='bg-white w-[230px] text-center text-gray-700 p-8 font-medium rounded-md border-purple-600 border-2'>
               <div><button>Retention Rate</button></div>
             </Link>
-            <Link to='/analytics/traffic-source' className='bg-white  w-2/12 text-center text-gray-700 p-8 font-medium rounded-md border-purple-600 border-2'>
+            <Link to='/analytics/traffic-source' className='bg-white  w-[230px] text-center text-gray-700 p-8 font-medium rounded-md border-purple-600 border-2'>
               <div><button>Traffic Source</button></div>
             </Link>
-            <Link to='/analytics/active-user' className='bg-white  w-2/12 text-center text-gray-700 p-8 font-medium rounded-md border-purple-600 border-2'>
+            {/* <Link to='/analytics/active-user' className='bg-white  w-2/12 text-center text-gray-700 p-8 font-medium rounded-md border-purple-600 border-2'>
               <div><button>Active User</button></div>
-            </Link>
-            <Link to='/analytics/user-demo' className='bg-white  w-2/12 text-center text-gray-700 p-8 font-medium rounded-md border-purple-600 border-2'>
+            </Link> */}
+
+            <Link to='/analytics/user-demo' className='bg-white  w-[230px] text-center text-gray-700 p-8 font-medium rounded-md border-purple-600 border-2'>
               <div><button>User Demographics</button></div>
             </Link>
-          </div>
-          <div className='flex items-center justify-between'>
-            <Link to='/analytics/device-type' className='bg-white  w-2/12 text-center text-gray-700 p-8 font-medium rounded-md border-purple-600 border-2'>
+            <Link to='/analytics/device-type' className='bg-white  w-[230px] text-center text-gray-700 p-8 font-medium rounded-md border-purple-600 border-2'>
               <div><button>Device Type</button></div>
             </Link>
-            <Link to='/analytics/success-failure' className='bg-white  w-2/12 text-center text-gray-700 p-8 font-medium rounded-md border-purple-600 border-2'>
+          </div>
+          <div className='w-[980px] md:w-[90vw] flex items-center justify-between'>
+            {/* <Link to='/analytics/device-type' className='bg-white  w-2/12 text-center text-gray-700 p-8 font-medium rounded-md border-purple-600 border-2'>
+              <div><button>Device Type</button></div>
+            </Link> */}
+            <Link to='/analytics/success-failure' className='bg-white  w-[230px] text-center text-gray-700 p-8 font-medium rounded-md border-purple-600 border-2'>
               <div><button>Success/Failure</button></div>
             </Link>
-            <Link to='/analytics/job-avail' className='bg-white  w-2/12 text-center text-gray-700 p-8 font-medium rounded-md border-purple-600 border-2'>
+            <Link to='/analytics/job-avail' className='bg-white  w-[230px] text-center text-gray-700 p-8 font-medium rounded-md border-purple-600 border-2'>
               <div><button>Job Availability</button></div>
             </Link>
-            <Link to='/analytics/user-interaction' className='bg-white  w-2/12 text-center text-gray-700 p-8 font-medium rounded-md border-purple-600 border-2'>
+            <Link to='/analytics/user-interaction' className='bg-white  w-[230px] text-center text-gray-700 p-8 font-medium rounded-md border-purple-600 border-2'>
               <div><button>User Interaction</button></div>
             </Link>
+            
           </div>
         </div>
 
