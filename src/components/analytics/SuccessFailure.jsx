@@ -58,9 +58,6 @@ const SuccessFailure = () => {
         }));
     }, [SFdata]);
 
-    console.log(SFdata.Success_data);
-    console.log(SFdata.Failure);
-
     return (
         <div>
             <Navbar />
