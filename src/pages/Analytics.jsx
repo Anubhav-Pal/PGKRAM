@@ -107,7 +107,7 @@ const Analytics = () => {
               <div><button>Active User</button></div>
             </Link>
             <Link to='/analytics/user-demo' className='bg-white  w-2/12 text-center text-gray-700 p-8 font-medium rounded-md border-purple-600 border-2'>
-              <div><button>User Demo</button></div>
+              <div><button>User Demographics</button></div>
             </Link>
           </div>
           <div className='flex items-center justify-between'>
