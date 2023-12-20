@@ -14,6 +14,7 @@ import DeviceType from './components/analytics/DeviceType'
 import SuccessFailure from './components/analytics/SuccessFailure'
 import JobAvail from './components/analytics/JobAvail'
 import UserInteraction from './components/analytics/UserInteraction'
+import UserDemographics from './components/analytics/UserDemographics'
 
 function App() {
 
@@ -30,7 +31,7 @@ function App() {
           <Route path='/analytics/retention-rate' element={<RetentionRate />} />
           <Route path='/analytics/traffic-source' element={<TrafficSource />} />
           <Route path='/analytics/active-user' element={<ActiveUser />} />
-          <Route path='/analytics/user-demo' element={<UserDemo />} />
+          <Route path='/analytics/user-demo' element={<UserDemographics/>} />
           <Route path='/analytics/device-type' element={<DeviceType />} />
           <Route path='/analytics/success-failure' element={<SuccessFailure />} />
           <Route path='/analytics/job-avail' element={<JobAvail />} />
