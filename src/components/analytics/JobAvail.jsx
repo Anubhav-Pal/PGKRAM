@@ -185,7 +185,7 @@ const JobAvail = () => {
                     value={selectedOption || ''}
                 >
                     <option value="">Select...</option>
-                    <option value="Status">Status</option>
+                    {/* <option value="Status"></option> */}
                     <option value="Age">Age</option>
                     <option value="Gender">Gender</option>
                     <option value="Education">Education</option>
