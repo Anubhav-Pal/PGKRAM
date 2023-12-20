@@ -1,205 +1,318 @@
-import React, { useState, useEffect } from 'react';
-import Chart from 'react-apexcharts';
-import Navbar from '../Navbar';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Chart from "react-apexcharts";
+import Navbar from "../Navbar";
 
-const JobAvail = () => {
-    const [selectedOption, setSelectedOption] = useState('Age');
+const jobAvail = () => {
+  const [button, setButton] = useState(true)
+  const [user, setUser] = useState(null);
+  const [options, setOptions] = useState({});
+  const [minAge, setMinAge] = useState();
+  const [maxAge, setMaxAge] = useState();
+  const [selectedGender, setSelectedGender] = useState("");
+  const [selectedEducation, setSelectedEducation] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedIndustries, setSelectedIndustries] = useState([]);
 
-    const handleOptionChange = (value) => {
-        setSelectedOption(value);
-    };
+  const [SFdata, setSFdata] = useState({});
+  const [chartData, setChartData] = useState({
+    options: {
+      chart: {
+        id: "education-chart",
+      },
+      xaxis: {
+        categories: [], // Provide default empty array or the appropriate initial value
+      },
+      title: {
+        // text: 'Education Distribution',
+        align: "center",
+      },
+    },
+    series: [
+      {
+        name: "Success",
+        data: [], // Provide default empty array or the appropriate initial value
+      },
+    ],
+  });
 
-    const [chartData, setChartData] = useState({
-        options: {
-            chart: {
-                id: 'line-chart',
-            },
-            xaxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-            },
-            title: {
-                text: 'User Demographics',
-                align: 'center',
-            },
-        },
-        series: [
-            {
-                name: 'Years',
-                data: [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011],
-            },
-            {
-                name: 'Age',
-                data: [25, 28, 35, 40, 22, 30, 32, 29, 26, 31, 34, 27],
-            },
-        ],
-    });
-
-    useEffect(() => {
-        const updateChartData = () => {
-            if (selectedOption === 'Age') {
-                setChartData({
-                    options: {
-                        chart: {
-                            id: 'age-chart',
-                        },
-                        xaxis: {
-                            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                        },
-                        title: {
-                            text: 'Age Distribution',
-                            align: 'center',
-                        },
-                    },
-                    series: [
-                        {
-                            name: 'Age',
-                            data: [25, 28, 35, 40, 22, 30, 32, 29, 26, 31, 34, 27],
-                        },
-                    ],
-                });
-            } else if (selectedOption === 'Gender') {
-                setChartData({
-                    options: {
-                        chart: {
-                            id: 'gender-chart',
-                        },
-                        xaxis: {
-                            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                        },
-                        title: {
-                            text: 'Gender Distribution',
-                            align: 'center',
-                        },
-                    },
-                    series: [
-                        {
-                            name: 'Male',
-                            data: [10, 12, 15, 18, 20, 22, 25, 28, 30, 32, 35, 38],
-                        },
-                        {
-                            name: 'Female',
-                            data: [8, 10, 12, 15, 18, 20, 22, 25, 28, 30, 32, 35],
-                        },
-                    ],
-                });
-            } else if (selectedOption === 'Education') {
-                setChartData({
-                    options: {
-                        chart: {
-                            id: 'education-chart',
-                        },
-                        xaxis: {
-                            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                        },
-                        title: {
-                            text: 'Education Distribution',
-                            align: 'center',
-                        },
-                    },
-                    series: [
-                        {
-                            name: 'High School',
-                            data: [15, 18, 20, 22, 25, 28, 30, 32, 35, 38, 40, 42],
-                        },
-                        {
-                            name: 'Bachelor\'s Degree',
-                            data: [10, 12, 15, 18, 20, 22, 25, 28, 30, 32, 35, 38],
-                        },
-                        {
-                            name: 'Master\'s Degree',
-                            data: [5, 8, 10, 12, 15, 18, 20, 22, 25, 28, 30, 32],
-                        },
-                    ],
-                });
-            } 
-            else if(selectedOption==='Status'){
-              setChartData({
-                options: {
-                    chart: {
-                        id: 'education-chart',
-                    },
-                    xaxis: {
-                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    },
-                    title: {
-                        text: 'Education Distribution',
-                        align: 'center',
-                    },
-                },
-                series: [
-                    {
-                        name: 'Success',
-                        data: [45, 68, 40, 72, 55, 48, 40, 32, 35, 78, 60, 82],
-                    },
-                    {
-                        name: 'Failure',
-                        data: [30, 12, 15, 18, 20, 22, 25, 28, 30, 32, 35, 38],
-                    },
-                ],
-            });
-            
-            }
-            else if (selectedOption === 'Industry') {
-                setChartData({
-                    options: {
-                        chart: {
-                            id: 'industry-chart',
-                        },
-                        xaxis: {
-                            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                        },
-                        title: {
-                            text: 'Industry Distribution',
-                            align: 'center',
-                        },
-                    },
-                    series: [
-                        {
-                            name: 'Technology',
-                            data: [20, 22, 25, 28, 30, 32, 35, 38, 40, 42, 45, 48],
-                        },
-                        {
-                            name: 'Healthcare',
-                            data: [15, 18, 20, 22, 25, 28, 30, 32, 35, 38, 40, 42],
-                        },
-                    ],
-                });
-            }
-        };
-
-        updateChartData();
-    }, [selectedOption]);
-
-    return (
-        <div>
-            <Navbar />
-            <div className='p-10'>
-        <h1 className='font-medium'>Job Availability</h1>
-        <h1 className='font-medium text-gray-400 text-sm'>Control and analyse your data in the most convenient way</h1>
-      </div>
-            <div className='px-10'>
-                <label className='border p-2 block'>Select an option:</label>
-                <select
-                    className='border p-2 mt-2'
-                    onChange={(e) => handleOptionChange(e.target.value)}
-                    value={selectedOption || ''}
-                >
-                    <option value="">Select...</option>
-                    {/* <option value="Status"></option> */}
-                    <option value="Age">Age</option>
-                    <option value="Gender">Gender</option>
-                    <option value="Education">Education</option>
-                    <option value="Industry">Industry</option>
-                </select>
-                <p className='mt-2'>Selected option: <span className=' bg-green-400 p-1 rounded-md'> {selectedOption}</span></p>
-            </div>
-            <div className='shadow flex items-center justify-center'>
-                <div className='p-4'>
-                    <Chart options={chartData.options} series={chartData.series} type='bar' width={700} />
-                </div>
-            </div>
-        </div>
+  // Event handler to update the selected industries state
+  const handleIndustryChange = (event) => {
+    const selectedOptions = Array.from(
+      event.target.selectedOptions,
+      (option) => option.value
     );
+    setSelectedIndustries(selectedOptions);
+  };
+  // Event handler to update the selected location state
+  const handleLocationChange = (event) => {
+    setSelectedLocation(event.target.value);
+  };
+  // Event handler to update the selected education state
+  const handleEducationChange = (event) => {
+    setSelectedEducation(event.target.value);
+  };
+  // Event handler to update the selected gender state
+  const handleGenderChange = (event) => {
+    setSelectedGender(event.target.value);
+  };
+
+  const handleMinAgeChange = (event) => {
+    setMinAge(event.target.value);
+  };
+
+  // Event handler to update maximum age state
+  const handleMaxAgeChange = (event) => {
+    setMaxAge(event.target.value);
+  };
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(
+        "https://pgrkam-backend.onrender.com/user-data"
+      );
+      setUser(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  if (user == null) {
+    return <div>Loading....</div>;
+  }
+  // console.log(user)
+
+  function objectToArray(user) {
+    // Check if the input is not null or undefined
+    if (user == null) {
+      return [];
+    }
+
+    // Use Object.entries to get an array of key-value pairs
+    return Object.entries(user);
+  }
+  const userdata = objectToArray(user);
+  console.log(userdata);
+
+  const handleFilterClick = () => {
+    setButton(false);
+    const result = getUsersCountByCriteria(
+      userdata,
+      minAge,
+      maxAge,
+      selectedLocation,
+      selectedEducation,
+      selectedGender,
+      selectedIndustries
+    );
+    console.log("Filtered user count", result);
+    setChartData({
+      options: {
+        chart: {
+          id: "education-chart",
+        },
+        xaxis: {
+          categories: ["7 SEP", "14 SEP", "21 SEP", " 28 SEP", "05 OCT", "12 OCT", "July", "August", "Sept", "Oct", "Nov", "Dec"]
+
+
+
+
+
+          , // Provide default empty array or the appropriate initial value
+        },
+        title: {
+          // text: 'Education Distribution',
+          align: "center",
+        },
+      },
+      series: [
+        {
+          name: "Success",
+          data: result, // Provide default empty array or the appropriate initial value
+        },
+      ],
+    })
+  };
+
+  function getUsersCountByCriteria(
+    usersData,
+    minAge,
+    maxAge,
+    location,
+    education,
+    gender,
+    industries
+  ) {
+    console.log("fn called");
+    const result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    const assignRandomValues = (result, min, max) => {
+      for (let i = 0; i < result.length; i++) {
+        result[i] = Math.floor(Math.random() * (700 - 100 + 1)) + min;
+      }
+    };
+    assignRandomValues(result, 100, 1000);
+
+    console.log(result);
+    setSFdata(result);
+
+
+    for (const monthData of usersData) {
+      let count = 0;
+
+      // Log information to understand the structure of monthData
+      console.log("monthData:", monthData);
+
+      // Assuming monthData is an array of users
+      for (const user of monthData) {
+        // Log user details to understand the structure of each user
+        console.log("user:", user);
+        console.log(user.age);
+        const ageInRange =
+          (minAge === "" || user.age >= parseInt(minAge, 10)) &&
+          (maxAge === "" || user.age <= parseInt(maxAge, 10));
+        const locationMatch =
+          location === undefined ||
+          (user.location &&
+            user.location.toLowerCase() === location.toLowerCase());
+        const educationMatch =
+          education === undefined ||
+          (user.education &&
+            user.education.toLowerCase() === education.toLowerCase());
+        const genderMatch =
+          gender === undefined ||
+          (user.gender && user.gender.toLowerCase() === gender.toLowerCase());
+        const industryMatch =
+          industries === undefined ||
+          industries.length === 0 ||
+          (user.industry && industries.includes(user.industry.toLowerCase()));
+        console.log(
+          ageInRange,
+          locationMatch,
+          educationMatch,
+          genderMatch,
+          industryMatch
+        );
+        if (
+          ageInRange &&
+          locationMatch &&
+          educationMatch &&
+          genderMatch &&
+          industryMatch
+        ) {
+          count++;
+        }
+      }
+
+      result[monthData.id] = count;
+    }
+
+    console.log("Final result:", result);
+
+    return result;
+  }
+
+  //   cosnt newResult=result
+
+  return (
+
+    <div>
+      <Navbar />
+      <div className="flex flex-col p-10">
+
+        <div className="my-4 border shadow p-4 rounded-md">
+          <label className="mr-2 mt-2">Min Age:</label>
+          <input type="number" className="border" value={minAge} onChange={handleMinAgeChange} />
+          <label className="ml-2 mt-2">Max Age:</label>
+          <input type="number" className="border ml-2 mt-2" value={maxAge} onChange={handleMaxAgeChange} />
+          <p className="mt-2">Min Age: <span className="mt-2 bg-green-400 rounded-md p-[0.5px]"> {minAge}</span></p>
+          <p className="mt-2">Max Age: <span className="bg-green-400 rounded-md p-[0.5px]"> {maxAge}</span></p>
+        </div>
+
+        <div className="my-4 border shadow p-4 rounded-md">
+          <label className="mr-2">Gender</label>
+          <select value={selectedGender} className="border" onChange={handleGenderChange}>
+            <option value="">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="transgender">Transgender</option>
+          </select>
+          <p>Selected Gender: <span className="bg-green-400 rounded-md p-[2px]"> {selectedGender}</span></p>
+        </div>
+
+        <div className="my-4 border shadow p-4 rounded-md">
+          <label className="mr-2">Education:</label>
+          <select value={selectedEducation} className="border" onChange={handleEducationChange}>
+            <option value="">Select Education</option>
+            <option value="10th pass">10th Pass</option>
+            <option value="12th pass">12th Pass</option>
+            <option value="graduate">Graduate</option>
+            <option value="post graduate">Postgraduate</option>
+          </select>
+          <p>Selected Education: {selectedEducation}</p>
+        </div>
+
+        <div className="my-4 border shadow p-4 rounded-md">
+          <div className="flex">
+            <div>
+
+              <label className="mr-2">Industry:</label>
+            </div>
+            <div>
+
+              <select
+              className="border"
+                value={selectedIndustries}
+                onChange={handleIndustryChange}
+                multiple
+              >
+                <option value="computerscience">Computer Science</option>
+                <option value="it">IT</option>
+                <option value="bussiness">business</option>
+                <option value="electrical">Electrical</option>
+                <option value="mechanical">mechanical</option>
+                <option value="information security">Information Security</option>
+              </select>
+            </div>
+          </div>
+          <p className="mt-3">Selected Industries: {selectedIndustries.join(", ")}</p>
+        </div>
+
+        <div className="my-4 border shadow p-4 rounded-md">
+          <label className="mr-2">Location:</label>
+          <select value={selectedLocation} onChange={handleLocationChange}>
+            <option value="">Select Location</option>
+            <option value="delhi">Delhi</option>
+            <option value="bengaluru">Bengaluru</option>
+            <option value="chennai">Chennai</option>
+            <option value="meerut">Meerut</option>
+            <option value="agra">Agra</option>
+          </select>
+
+          <p>Selected Location: {selectedLocation}</p>
+        </div>
+
+        <div>
+          <button onClick={handleFilterClick} type="submit" className={` ${button? '':'disabled'} rounded-sm bg-[#ED9017] w-44 px-3 py-1 my-6 text-white font-semibold text-xs`}>Apply Filter</button>
+
+        </div>
+
+        <div className=" flex items-center justify-center border shadow p-4 rounded-md">
+          <div className=" border shadow p-4 rounded-md">
+            <Chart
+              options={chartData.options}
+              series={chartData.series}
+              type="bar"
+              width={700}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
-export default JobAvail;
+export default jobAvail;
