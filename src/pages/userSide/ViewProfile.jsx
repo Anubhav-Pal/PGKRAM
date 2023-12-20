@@ -3,9 +3,9 @@ import { FaQrcode } from "react-icons/fa";
 import { Line } from "react-chartjs-2";
 import QrCode from "qrcode.react";
 import ProfileForm from "./ProfileForm";
+// import { Line } from "react-chartjs-2";
 
 const ViewProfile = () => {
-  const [qrcode, setQr] = useState(false);
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [selectedResume, setSelectedResume] = useState(null);
   const [showProfile, setShowProfile] = useState(false);
@@ -18,19 +18,14 @@ const ViewProfile = () => {
   const handleScan = (data) => {
     if (data) {
       setQrCodeScannerVisible(false);
-      // Assuming data is the userId, you may need to adjust this based on your implementation
-      // Check if a resume is selected
       if (selectedResume) {
-        handleDownloadResume(); // Trigger download when QR code is scanned
+        handleDownloadResume();
         console.log("Resume downloaded");
       } else {
-        // Handle the case where no resume is selected
-        // You can show a message or take other actions
         console.log("Please upload a resume first");
       }
     }
   };
-  
 
   const handleError = (err) => {
     console.error(err);
@@ -43,8 +38,7 @@ const ViewProfile = () => {
   const handleUploadResume = (file) => {
     setSelectedResume(file);
     setShowUploadModal(false);
-    setResumeUploaded(true); // Set resumeUploaded to true when a resume is uploaded
-    // Perform additional actions if needed
+    setResumeUploaded(true);
   };
 
   const handleUpdate = () => {
@@ -63,13 +57,10 @@ const ViewProfile = () => {
   };
 
   const handleQrCode = () => {
-    // Check if a resume is selected
     if (selectedResume) {
-      handleDownloadResume(); // Trigger download when QR code is scanned
+      handleDownloadResume();
       console.log("Resume downloaded");
     } else {
-      // Handle the case where no resume is selected
-      // You can show a message or take other actions
       console.log("Please upload a resume first");
     }
   };
@@ -143,7 +134,6 @@ const ViewProfile = () => {
       </div>
 
       <div className="info-card font-medium text-sm">
-        {" "}
         Your profile will be discovered by recruiters better when you add
         missing information
       </div>
@@ -159,14 +149,12 @@ const ViewProfile = () => {
           </div>
           <div>
             <h1 className="font-medium text-lg">Rohan</h1>
-            {/* <h1 className='font-normal text-sm text-gray-600'>MERN Developer, Developer @GDSC</h1> */}
-            {/* <h1 className='font-normal text-sm text-gray-600'>Noida</h1> */}
           </div>
         </div>
         <div className="flex gap-1 items-center justify-between">
           <button
             onClick={handleEditprofile}
-            className=" rounded-sm bg-[#ED9017] px-3 py-1 my-2 text-white uppercase font-semibold text-xs"
+            className="rounded-sm bg-[#ED9017] px-3 py-1 my-2 text-white uppercase font-semibold text-xs"
           >
             Edit profile
           </button>
@@ -186,7 +174,6 @@ const ViewProfile = () => {
 
       <div className={`${showProfile ? "flex" : "hidden"} profile-form`}>
         <ProfileForm />
-        {/* <button onClick={handleUpdate} className='rounded-sm bg-[#ED9017] px-3 py-1 my-2 text-white uppercase font-semibold text-xs'>Update</button> */}
       </div>
 
       <div
@@ -202,20 +189,39 @@ const ViewProfile = () => {
               <h1 className="mt-10 font-bold text-xl text-purple-700">+2.5%</h1>
             </div>
             <div className="w-52">
-              <Line
+              {/* <Line
                 data={{
                   labels: [" ", " ", " ", " ", " ", " "],
                   datasets: [
                     {
                       label: " ",
                       data: [200, 400, 600, 800, 900, 1000],
-                      borderColor: "rgb(249, 115, 22)", // Add the desired color for the line
-                      backgroundColor: "rgba(0, 0, 0, 0)", // Optional: Set background color to make it transparent
-                      borderWidth: 2, // Add the desired line width
+                      borderColor: "rgb(249, 115, 22)",
+                      backgroundColor: "rgba(0, 0, 0, 0)",
+                      borderWidth: 2,
                     },
                   ],
                 }}
-              />
+                options={{
+                  scales: {
+                    xAxes: [
+                      {
+                        type: "linear",
+                        position: "bottom",
+                      },
+                    ],
+                    yAxes: [
+                      {
+                        ticks: {
+                          beginAtZero: true,
+                        },
+                      },
+                    ],
+                  },
+                  maintainAspectRatio: false, // Add this line
+                  responsive: true, // Add this line
+                }}
+              /> */}
             </div>
           </div>
           <div className="flex p-2 gap-2 bg-gray-100 rounded-md">
@@ -225,43 +231,17 @@ const ViewProfile = () => {
               <h1 className="mt-10 font-bold text-xl text-purple-700">+1.5%</h1>
             </div>
             <div className="w-52">
-              <Line
-                data={{
-                  labels: [" ", " ", " ", " ", " ", " "],
-                  datasets: [
-                    {
-                      label: " ",
-                      data: [200, 400, 600, 800, 900, 1000],
-                      borderColor: "rgb(249, 115, 22)", // Add the desired color for the line
-                      backgroundColor: "rgba(0, 0, 0, 0)", // Optional: Set background color to make it transparent
-                      borderWidth: 2, // Add the desired line width
-                    },
-                  ],
-                }}
-              />
+              {/* Add your Line chart configuration here */}
             </div>
           </div>
           <div className="flex p-2 gap-2 bg-gray-100 rounded-md">
             <div>
-              <h1 className="text-sm text-gray-500">Search appearcances</h1>
+              <h1 className="text-sm text-gray-500">Search appearances</h1>
               <h1 className="font-bold text-3xl text-gray-700">461</h1>
               <h1 className="mt-10 font-bold text-xl text-purple-700">-4.4%</h1>
             </div>
             <div className="w-52">
-              <Line
-                data={{
-                  labels: [" ", " ", " ", " ", " ", " "],
-                  datasets: [
-                    {
-                      label: " ",
-                      data: [200, 400, 600, 800, 900, 1000],
-                      borderColor: "rgb(249, 115, 22)", // Add the desired color for the line
-                      backgroundColor: "rgba(0, 0, 0, 0)", // Optional: Set background color to make it transparent
-                      borderWidth: 2, // Add the desired line width
-                    },
-                  ],
-                }}
-              />
+              {/* Add your Line chart configuration here */}
             </div>
           </div>
           <div className="flex p-2 gap-2 bg-gray-100 rounded-md w-full">
@@ -289,7 +269,7 @@ const ViewProfile = () => {
             always open to new challenges.
           </p>
         </div>
-        <div className="user-exprerience  bg-gray-100 p-3 rounded-md">
+        <div className="user-experience  bg-gray-100 p-3 rounded-md">
           <h1 className="font-medium text-lg">Experience</h1>
           <div className="flex flex-col gap-2">
             <div className="flex gap-2 items-start">

@@ -3,6 +3,7 @@ import { FaFacebookF,FaTwitter, FaYoutube } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
 import { TfiYoutube } from "react-icons/tfi";
 import map from "../../assets/map.png";
+import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
   return (
@@ -107,7 +108,7 @@ const HeroSection = () => {
 </div>
 
 <div className='text-white px-4 my-3'>Forgot password | Login using OTP</div>
-<button className='bg-[#ED9017] text-black  p-1 rounded-2xl px-3 py-1'>Login</button>
+<button className='bg-[#ED9017] text-black  p-1 rounded-2xl px-3 py-1'><Link to='/user'>Login</Link></button>
 </div>
 
 </div>
