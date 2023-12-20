@@ -4,9 +4,10 @@ import JobDisplay from '../../components/JobDisplay';
 import Featured from '../../components/Featured';
 import axios from 'axios';
 const Jobs = () => {
-  const [data, setData] = useState({});
+  // const [data, setData] = useState({});
   const [hasPremium, setHasPremium] = useState(false);
   const [showPremiumPopup, setShowPremiumPopup] = useState(false);
+  const [jobsArray, setJobsArray] = useState([])
 
 
   const handleJobFinderClick = () => {
@@ -16,8 +17,10 @@ const Jobs = () => {
     }
   };
 
-  const handleRemoveJob = (id) => {
-    setJobs(prevJobs => prevJobs.filter(job => job.id !== id));
+  
+
+  const removeJob = (id) => {
+    // setJobsArray((prevJobs) => prevJobs.filter((job) => job.id !== id));
   };
 
   const handleSaveJob = (id) => {
@@ -36,25 +39,21 @@ const Jobs = () => {
   const handlePopupClose = () => {
     setShowPremiumPopup(false);
   };
-
+  
   // fetching the data
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get('https://pgrkam-backend.onrender.com/get-jobs');
-        setData(response.data['Featured']);
-        
-        
-        
+        setJobsArray(Object.values(response.data['Featured']));
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-    
     fetchData();
-  }, [])
+  }, []);
   
-  console.log(data);
+  console.log(jobsArray);
 
   return (
     <div className='flex m-auto py-4 bg-gray-100'>
@@ -82,7 +81,7 @@ const Jobs = () => {
               <div className='flex justify-end'> <button
                 className='flex p-2 cursor-pointer'
                 onClick={handlePopupClose}
-              >
+                >
                 &times;
               </button></div>
 
@@ -147,16 +146,14 @@ const Jobs = () => {
         <div className='text-[14px] text-center my-4'>RECOMMENDED JOBS FOR YOU</div>
 
         {/* jobs */}
-        {Object.values(data).map(jobData => (
-          <JobDisplay jobData={jobData} key={jobData.key} />
+        {jobsArray.map(jobData => (
+          <JobDisplay jobData={jobData} key={jobData.key} removeJob={removeJob} />
         ))}
-
       </div>
-
       {/* 2nd col */}
 
       <div className='w-1/4 m-auto bg-white'>
-       <div className='absolute top-60 mr-8'> <Featured  /></div>
+        <div className='absolute top-60 mr-8'> <Featured /></div>
       </div>
     </div>
   )

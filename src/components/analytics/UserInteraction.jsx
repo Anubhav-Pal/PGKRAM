@@ -1,145 +1,97 @@
-import React, { useState, useEffect } from "react";
-import ReactApexChart from "react-apexcharts";
-import Navbar from "../Navbar";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
+import Chart from 'react-apexcharts';
+import Navbar from '../Navbar';
+import axios from 'axios';
 
-const TrafficSource = () => {
-    const [first, setfirst] = useState("Retention rate");
-    const [data, setData] = useState(null);
-    const [retention, setRetentionData] = useState(null)
-    const [traffic, setTraffic] = useState(null);
-    const [user, setUser] = useState(null);
-    const [options, setOptions] = useState(null);
+const SuccessFailure = () => {
+    const [SFdata, setSFdata] = useState({});
+    const [chartData, setChartData] = useState({
+        options: {
+            chart: {
+                id: 'education-chart',
+            },
+            xaxis: {
+                categories: [], // Provide default empty array or the appropriate initial value
+            },
+            title: {
+                // text: 'Education Distribution',
+                align: 'center',
+            },
+        },
+        series: [
+            {
+                name: 'Success',
+                data: [], // Provide default empty array or the appropriate initial value
+            },
+        ],
+    });
+
     useEffect(() => {
-        const fetchTrafficData = async () => {
+        const fetchData = async () => {
             try {
-                const response = await axios.get(
-                    "https://pgrkam-backend.onrender.com/traffic-data"
-                );
-                setTraffic(response.data);
+                const response = await axios.get('https://pgrkam-backend.onrender.com/get-options');
+                setSFdata(response.data);
+                // console.log((response.data));
             } catch (error) {
-                console.error("Error fetching data:", error);
+                console.error('Error fetching data:', error);
             }
         };
-        fetchTrafficData();
-        const fetchData = async () => {
-          try {
-            const response = await axios.get('https://pgrkam-backend.onrender.com/get-device');
-            setData(response.data);
-          } catch (error) {
-            console.error('Error fetching data:', error);
-          }
-        };
         fetchData();
-        const fetchRetentionData = async () => {
-          try {
-            const response = await axios.get('https://pgrkam-backend.onrender.com/get-retention');
-            setRetentionData(response.data);
-          } catch (error) {
-            console.error('Error fetching data:', error);
-          }
-        };
-        fetchRetentionData();
-        const fetchUserData = async () => {
-          try {
-            const response = await axios.get('https://pgrkam-backend.onrender.com/user-data');
-            setUser(response.data);
-          } catch (error) {
-            console.error('Error fetching data:', error);
-          }
-        };
-        fetchUserData();
-        const fetchOptionsData = async () => {
-          try {
-            const response = await axios.get('https://pgrkam-backend.onrender.com/get-options');
-            setUser(response.data);
-          } catch (error) {
-            console.error('Error fetching data:', error);
-          }
-        };
-        fetchOptionsData();
     }, []);
-    // console.log(options) 
-    console.log(user)
-    // console.log(retention)
-    // console.log(data)
-    // console.log(traffic);
 
-    const optionschart = {
-        chart: {
-            type: "donut",
-            offsetY: 10,
-        },
-        plotOptions: {
-            pie: {
-                size: 150,
-                donut: {
-                    size: "70%",
-                },
-            },
-        },
-        labels: [
-            "Counselling",
-            "Induction into Armed Forces",
-            "Jobs",
-            "Jobs for Persons with Disability",
-            "Jobs for Women",
-            "Local Services",
-            "Self Employment",
-            "Skill Training",
-        ],
-        colors: [
-            "#4329EA",
-            "#6853ED",
-            "#8F80F0",
-            "#BEB6F4",
-            "#BEB6F499",
-            "#C2BBF580",
-            "#DEDAF780",
-            "#D9D9D94D",
-        ],
-        dataLabels: {
-            style: {
-                fontSize: "16px", // Adjust font size of labels
-            },
-        },
+    const valuesFor2023 = {
+        Counselling: SFdata.Counselling ? SFdata.Counselling['2023'] : null,
+        'Induction into Armed Forces': SFdata['Induction into Armed Forces'] ? SFdata['Induction into Armed Forces']['2023'] : null,
+        Jobs: SFdata.Jobs ? SFdata.Jobs['2023'] : null,
+        'Jobs for Persons with Disability': SFdata['Jobs for Persons with Disability'] ? SFdata['Jobs for Persons with Disability']['2023'] : null,
+        'Jobs for Women': SFdata['Jobs for Women'] ? SFdata['Jobs for Women']['2023'] : null,
+        'Local Services': SFdata['Local Services'] ? SFdata['Local Services']['2023'] : null,
+        'Self Employment': SFdata['Self Employment'] ? SFdata['Self Employment']['2023'] : null,
+        'Skill Training': SFdata['Skill Training'] ? SFdata['Skill Training']['2023'] : null,
     };
 
-    const generateSeriesData = () => {
-      // Check if static data is available, otherwise return an empty array
-      if (true) {
-          // Provide static data as an example
-          return [22, 20, 50, 25, 15, 8, 12, 10];
-      }
-  
-      const labels = optionschart.labels;
-      const seriesData = labels.map((label) => traffic[label]);
-  
-      return seriesData;
-  };
-  
-  const series = generateSeriesData();
+    console.log(valuesFor2023);
+    useEffect(() => {
+        // Check if SFdata has the necessary keys before updating chartData
+        if (Object.keys(SFdata).length > 0) {
+            setChartData({
+                options: {
+                    chart: {
+                        id: 'education-chart',
+                    },
+                    xaxis: {
+                        categories: Object.keys(valuesFor2023),
+                    },
+                    title: {
+                        // text: 'Education Distribution',
+                        align: 'center',
+                    },
+                },
+                series: [
+                    {
+                        // name: 'Success',
+                        data: Object.values(valuesFor2023),
+                    },
+                ],
+            });
+        }
+    }, [SFdata]);
+
 
     return (
-        <div className="h-screen bg-gray-100 ">
+        <div>
             <Navbar />
             <div className='p-10'>
-        <h1 className='font-medium'>User Interaction</h1>
-        <h1 className='font-medium text-gray-400 text-sm'>Control and analyse your data in the most convenient way</h1>
-      </div>
-            <div className="mx-auto rounded-lg mb-12 w-3/5 bg-white px-10 text-[20px] text-center">
-                {/* <div className="font-bold">How users found about PGRKAM</div> */}
-                <div className="py-10 text-[16px]">
-                    <ReactApexChart
-                        options={optionschart}
-                        series={series}
-                        type="donut"
-                        height={300} // Adjust the height as needed
-                    />
+                <h1 className='font-medium'>User Interaction</h1>
+                <h1 className='font-medium text-gray-400 text-sm'>Control and analyse your data in the most convenient way</h1>
+            </div>
+            <div className='shadow flex items-center justify-center'>
+                <div className='p-4'>
+                    <Chart options={chartData.options} series={chartData.series} type='bar' width={700} />
                 </div>
             </div>
         </div>
     );
 };
 
-export default TrafficSource;
+export default SuccessFailure;
