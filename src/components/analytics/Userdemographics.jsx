@@ -1,20 +1,39 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Chart from "react-apexcharts";
+import Navbar from "../Navbar";
 
 const UserDemographics = () => {
   const [user, setUser] = useState(null);
   const [options, setOptions] = useState({});
-  const [minAge, setMinAge] = useState(18);
-  const [maxAge, setMaxAge] = useState(29);
-  const [selectedGender, setSelectedGender] = useState("male");
-  const [selectedEducation, setSelectedEducation] = useState("post graduate");
-  const [selectedLocation, setSelectedLocation] = useState("bengaluru");
-  const [selectedIndustries, setSelectedIndustries] = useState([
-    "computer science",
-    "electrical",
-    "it",
-  ]);
+  const [minAge, setMinAge] = useState();
+  const [maxAge, setMaxAge] = useState();
+  const [selectedGender, setSelectedGender] = useState("");
+  const [selectedEducation, setSelectedEducation] = useState("");
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [selectedIndustries, setSelectedIndustries] = useState([]);
+
+  const [SFdata, setSFdata] = useState({});
+  const [chartData, setChartData] = useState({
+    options: {
+      chart: {
+        id: "education-chart",
+      },
+      xaxis: {
+        categories: [], // Provide default empty array or the appropriate initial value
+      },
+      title: {
+        // text: 'Education Distribution',
+        align: "center",
+      },
+    },
+    series: [
+      {
+        name: "Success",
+        data: [], // Provide default empty array or the appropriate initial value
+      },
+    ],
+  });
 
   // Event handler to update the selected industries state
   const handleIndustryChange = (event) => {
@@ -89,6 +108,32 @@ const UserDemographics = () => {
       selectedIndustries
     );
     console.log("Filtered user count", result);
+    setChartData({
+        options: {
+          chart: {
+            id: "education-chart",
+          },
+          xaxis: {
+            categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "July", "August", "Sept", "Oct", "Nov", "Dec"]
+
+
+
+
+
+            , // Provide default empty array or the appropriate initial value
+          },
+          title: {
+            // text: 'Education Distribution',
+            align: "center",
+          },
+        },
+        series: [
+          {
+            name: "Success",
+            data: result, // Provide default empty array or the appropriate initial value
+          },
+        ],
+      })
   };
 
   function getUsersCountByCriteria(
@@ -100,16 +145,19 @@ const UserDemographics = () => {
     gender,
     industries
   ) {
-
     console.log("fn called");
     const result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     const assignRandomValues = (result, min, max) => {
-        for (let i = 0; i < result.length; i++) {
-          result[i] = Math.floor(Math.random() * (700 - 100 + 1)) + min;
-        }
-      };
-     assignRandomValues(result,100,1000); 
-     console.log(result)
+      for (let i = 0; i < result.length; i++) {
+        result[i] = Math.floor(Math.random() * (700 - 100 + 1)) + min;
+      }
+    };
+    assignRandomValues(result, 100, 1000);
+
+    console.log(result);
+    setSFdata(result);
+
+
     for (const monthData of usersData) {
       let count = 0;
 
@@ -165,8 +213,14 @@ const UserDemographics = () => {
     return result;
   }
 
+//   cosnt newResult=result
+
   return (
-    <div className="flex flex-col items-center">
+
+    <div>
+<Navbar/>
+<div className="flex flex-col items-center">
+      
       <div className="my-4">
         <label className="mr-2">Min Age:</label>
         <input type="number" value={minAge} onChange={handleMinAgeChange} />
@@ -234,7 +288,17 @@ const UserDemographics = () => {
         <button onClick={handleFilterClick}>Apply Filter</button>
       </div>
 
-      
+      <div className="shadow flex items-center justify-center">
+        <div className="p-4">
+          <Chart
+            options={chartData.options}
+            series={chartData.series}
+            type="bar"
+            width={700}
+          />
+        </div>
+      </div>
+    </div>
     </div>
   );
 };
