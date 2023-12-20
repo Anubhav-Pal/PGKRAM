@@ -1,197 +1,110 @@
 import React, { useState, useEffect } from 'react';
 import Chart from 'react-apexcharts';
 import Navbar from '../Navbar';
+import axios from 'axios';
+
+
+
+
+// / Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { logEvent } from 'firebase/analytics';
+// import { useEffect } from 'react'
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBtN5KQkpsXzN1zqvQVt1djUKLrsP_uDP8",
+  authDomain: "pgrkam-117c0.firebaseapp.com",
+  databaseURL: "https://pgrkam-117c0-default-rtdb.firebaseio.com",
+  projectId: "pgrkam-117c0",
+  storageBucket: "pgrkam-117c0.appspot.com",
+  messagingSenderId: "980934921200",
+  appId: "1:980934921200:web:126d7d851381bc022b2b35",
+  measurementId: "G-MFTHEZYJ0C"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+// function App() {
+
+  
 
 const SuccessFailure = () => {
-    const [selectedOption, setSelectedOption] = useState('Age');
-
-    const handleOptionChange = (value) => {
-        setSelectedOption(value);
-    };
-
+    const [SFdata, setSFdata] = useState({});
     const [chartData, setChartData] = useState({
         options: {
             chart: {
-                id: 'line-chart',
+                id: 'education-chart',
             },
             xaxis: {
                 categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
             },
             title: {
-                text: 'User Demographics',
+                // text: 'Education Distribution',
                 align: 'center',
             },
         },
         series: [
             {
-                name: 'Years',
-                data: [2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011],
+                name: 'Success',
+                data: [45, 68, 40, 72, 55, 48, 40, 32, 35, 78, 60, 82],
             },
             {
-                name: 'Age',
-                data: [25, 28, 35, 40, 22, 30, 32, 29, 26, 31, 34, 27],
+                name: 'Failure',
+                data: [30, 12, 15, 18, 20, 22, 25, 28, 30, 32, 35, 38],
             },
         ],
     });
 
     useEffect(() => {
-        const updateChartData = () => {
-            if (selectedOption === 'Age') {
-                setChartData({
-                    options: {
-                        chart: {
-                            id: 'age-chart',
-                        },
-                        xaxis: {
-                            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                        },
-                        title: {
-                            text: 'Age Distribution',
-                            align: 'center',
-                        },
-                    },
-                    series: [
-                        {
-                            name: 'Age',
-                            data: [25, 28, 35, 40, 22, 30, 32, 29, 26, 31, 34, 27],
-                        },
-                    ],
-                });
-            } else if (selectedOption === 'Gender') {
-                setChartData({
-                    options: {
-                        chart: {
-                            id: 'gender-chart',
-                        },
-                        xaxis: {
-                            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                        },
-                        title: {
-                            text: 'Gender Distribution',
-                            align: 'center',
-                        },
-                    },
-                    series: [
-                        {
-                            name: 'Male',
-                            data: [10, 12, 15, 18, 20, 22, 25, 28, 30, 32, 35, 38],
-                        },
-                        {
-                            name: 'Female',
-                            data: [8, 10, 12, 15, 18, 20, 22, 25, 28, 30, 32, 35],
-                        },
-                    ],
-                });
-            } else if (selectedOption === 'Education') {
-                setChartData({
-                    options: {
-                        chart: {
-                            id: 'education-chart',
-                        },
-                        xaxis: {
-                            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                        },
-                        title: {
-                            text: 'Education Distribution',
-                            align: 'center',
-                        },
-                    },
-                    series: [
-                        {
-                            name: 'High School',
-                            data: [15, 18, 20, 22, 25, 28, 30, 32, 35, 38, 40, 42],
-                        },
-                        {
-                            name: 'Bachelor\'s Degree',
-                            data: [10, 12, 15, 18, 20, 22, 25, 28, 30, 32, 35, 38],
-                        },
-                        {
-                            name: 'Master\'s Degree',
-                            data: [5, 8, 10, 12, 15, 18, 20, 22, 25, 28, 30, 32],
-                        },
-                    ],
-                });
-            } 
-            else if(selectedOption==='Status'){
-              setChartData({
-                options: {
-                    chart: {
-                        id: 'education-chart',
-                    },
-                    xaxis: {
-                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    },
-                    title: {
-                        text: 'Education Distribution',
-                        align: 'center',
-                    },
-                },
-                series: [
-                    {
-                        name: 'Success',
-                        data: [45, 68, 40, 72, 55, 48, 40, 32, 35, 78, 60, 82],
-                    },
-                    {
-                        name: 'Failure',
-                        data: [30, 12, 15, 18, 20, 22, 25, 28, 30, 32, 35, 38],
-                    },
-                ],
-            });
-            
-            }
-            else if (selectedOption === 'Industry') {
-                setChartData({
-                    options: {
-                        chart: {
-                            id: 'industry-chart',
-                        },
-                        xaxis: {
-                            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                        },
-                        title: {
-                            text: 'Industry Distribution',
-                            align: 'center',
-                        },
-                    },
-                    series: [
-                        {
-                            name: 'Technology',
-                            data: [20, 22, 25, 28, 30, 32, 35, 38, 40, 42, 45, 48],
-                        },
-                        {
-                            name: 'Healthcare',
-                            data: [15, 18, 20, 22, 25, 28, 30, 32, 35, 38, 40, 42],
-                        },
-                    ],
-                });
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('https://pgrkam-backend.onrender.com/get-success');
+                setSFdata(response.data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
             }
         };
+        fetchData();
+    }, []);
 
-        updateChartData();
-    }, [selectedOption]);
+    useEffect(() => {
+        setChartData((prevChartData) => ({
+            ...prevChartData,
+            series: [
+                {
+                    name: 'Success',
+                    data: SFdata.Success_data || [],
+                },
+                {
+                    name: 'Failure',
+                    data: SFdata.Failure || [],
+                },
+            ],
+        }));
+    }, [SFdata]);
+
+
+    useEffect(() => {
+        console.log(analytics); // Check if 'logEvent' is present
+        logEvent(analytics, 'component_mount', {
+          componentName: 'SuccessFailure', // Replace with your actual component name
+        });
+      }, []);
 
     return (
         <div>
             <Navbar />
             <div className='p-10'>
-        <h1 className='font-medium'>Job Success  Failure ration</h1>
-        <h1 className='font-medium text-gray-400 text-sm'>Control and analyse your data in the most convenient way</h1>
-      </div>
-            <div className='px-10'>
-                <label className='border p-2 block'>Select an option:</label>
-                <select
-                    className='border p-2 mt-2'
-                    onChange={(e) => handleOptionChange(e.target.value)}
-                    value={selectedOption || ''}
-                >
-                    <option value="">Select...</option>
-                    <option value="Status">Status</option>
-                    <option value="Age">Age</option>
-                    <option value="Gender">Gender</option>
-                    <option value="Education">Education</option>
-                    <option value="Industry">Industry</option>
-                </select>
-                <p className='mt-2'>Selected option: <span className=' bg-green-400 p-1 rounded-md'> {selectedOption}</span></p>
+                <h1 className='font-medium'>Job Success Failure ratio</h1>
+                <h1 className='font-medium text-gray-400 text-sm'>Control and analyse your data in the most convenient way</h1>
             </div>
             <div className='shadow flex items-center justify-center'>
                 <div className='p-4'>

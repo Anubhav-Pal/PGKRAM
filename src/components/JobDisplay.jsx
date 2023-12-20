@@ -7,19 +7,7 @@ import { Link } from 'react-router-dom';
 
 const JobDisplay = (props) => {
   const [isSaved, setIsSaved] = useState(false);
-
-  useEffect(() => {
-    const savedJobs = JSON.parse(localStorage.getItem('savedJobs')) || [];
-    const isJobSaved = savedJobs.some(savedJob => savedJob && savedJob.id && savedJob.id === props.id);
-  
-    setIsSaved(isJobSaved);
-  }, [props.id, setIsSaved]);
-
-  const handleRemove = () => {
-    if (props.onRemove) {
-      props.onRemove();
-    }
-  };
+  const [isDisplayed, setIsDisplayed] = useState(true);
 
   const handleSave = () => {
     if (isSaved) {
@@ -33,6 +21,20 @@ const JobDisplay = (props) => {
     }
   };
 
+
+  const handleRemove = () => {
+    setIsDisplayed(false);
+    // window.warning("You sure want to remove this recommedation?")
+    if (props.removeJob) {
+      props.removeJob(props.jobData.id);
+    }
+    toast.success('jobs like these wont be recommended to you.')
+  };
+
+  if (!isDisplayed) {
+    return null; // Do not render if not displayed
+  }
+
   const generateUniqueLink = () => {
     // Implement your logic to generate a unique link
     const link = `https://example.com/${uuidv4()}`;
@@ -45,7 +47,6 @@ const JobDisplay = (props) => {
 
 
   const singleJob = props.jobData;
-  // console.log(singleJob);
 
   const words = singleJob.about.split(/\s+/);
   const text = words.slice(0, 15).join(' ');
@@ -87,3 +88,5 @@ const JobDisplay = (props) => {
 }
 
 export default JobDisplay;
+
+

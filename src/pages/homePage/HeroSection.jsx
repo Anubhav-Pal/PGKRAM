@@ -107,8 +107,8 @@ const HeroSection = () => {
 <input className='p-1 rounded-full text-gray-600' type='password' placeholder='Enter password'/>
 </div>
 
-<div className='text-white px-4 my-3'>Forgot password | Login using OTP</div>
-<button className='bg-[#ED9017] text-black  p-1 rounded-2xl px-3 py-1'><Link to='/user'>Login</Link></button>
+<div className='text-white md:hidden px-4 my-3'>Forgot password | Login using OTP</div>
+<button className='bg-[#ED9017] text-black  p-1 rounded-2xl px-3 py-1 md:mt-[15px]'><Link to='/user'>Login</Link></button>
 </div>
 
 </div>

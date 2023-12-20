@@ -14,8 +14,43 @@ import DeviceType from './components/analytics/DeviceType'
 import SuccessFailure from './components/analytics/SuccessFailure'
 import JobAvail from './components/analytics/JobAvail'
 import UserInteraction from './components/analytics/UserInteraction'
+import UserDemographics from './components/analytics/UserDemographics'
+
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { logEvent } from 'firebase/analytics';
+import { useEffect } from 'react'
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBtN5KQkpsXzN1zqvQVt1djUKLrsP_uDP8",
+  authDomain: "pgrkam-117c0.firebaseapp.com",
+  databaseURL: "https://pgrkam-117c0-default-rtdb.firebaseio.com",
+  projectId: "pgrkam-117c0",
+  storageBucket: "pgrkam-117c0.appspot.com",
+  messagingSenderId: "980934921200",
+  appId: "1:980934921200:web:126d7d851381bc022b2b35",
+  measurementId: "G-MFTHEZYJ0C"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
 function App() {
+
+  useEffect(() => {
+    console.log(analytics); // Check if 'logEvent' is present
+    logEvent(analytics, 'component_mount', {
+      componentName: 'App', // Replace with your actual component name
+    });
+  }, []);
 
   return (
     <div>
@@ -30,7 +65,7 @@ function App() {
           <Route path='/analytics/retention-rate' element={<RetentionRate />} />
           <Route path='/analytics/traffic-source' element={<TrafficSource />} />
           <Route path='/analytics/active-user' element={<ActiveUser />} />
-          <Route path='/analytics/user-demo' element={<UserDemo />} />
+          <Route path='/analytics/user-demo' element={<UserDemographics/>} />
           <Route path='/analytics/device-type' element={<DeviceType />} />
           <Route path='/analytics/success-failure' element={<SuccessFailure />} />
           <Route path='/analytics/job-avail' element={<JobAvail />} />
