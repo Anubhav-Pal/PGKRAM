@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 const HeroSection = () => {
     return (
         <div>
-            <div className='flex items-center h-[40vh] justify-between bg-green-950'>
+            <div className='flex items-center h-[] justify-between bg-green-950'>
 
                 {/* social media links */}
                 <div className=''>
@@ -97,18 +97,18 @@ const HeroSection = () => {
                 </div>
 
                 {/* reg form */}
-                <div className='bg-black mr-12 h-full text-center'>
-                    <div className='text-black text-[20px] bg-[#ED9017] rounded-full w-2/3 m-auto mt-6 justify-center flex items-center  px-10 '>Registration<span className='text-white text-[12px] border-white border-2 p-1 rounded-full'>Free</span></div>
+                <div className='bg-black mr-12 h-full text-center p-2'>
+                    <div className='text-black text-[20px] bg-[#ED9017] rounded-full  m-auto mt-6 justify-center flex items-center w-full p-3 '>Registration<span className='text-white text-[12px] border-white border-2 p-1 rounded-full'>Free</span></div>
                     <div className='text-white my-3'>-----OR-----</div>
                     <div className='my-2 '>
-                        <input className='p-1 rounded-full text-gray-600' type='text' placeholder='Enter username' />
+                        <input className='p-1 w-full py-2 p-3 rounded-full text-gray-600' type='text' placeholder='Enter username' />
                     </div>
                     <div>
-                        <input className='p-1 rounded-full text-gray-600' type='password' placeholder='Enter password' />
+                        <input className='p-1 w-full py-2 p-3 rounded-full text-gray-600' type='password' placeholder='Enter password' />
                     </div>
 
                     <div className='text-white md:hidden px-4 my-3'>Forgot password | Login using OTP</div>
-                    <button className='bg-[#ED9017] text-black  p-1 rounded-2xl px-3 py-1 md:mt-[15px]'><Link to='/user'>Login</Link></button>
+                    <button className='bg-[#ED9017] font-bold w-full py-2  rounded-2xl px-3 md:mt-[15px] text-white '><Link to='/user'>Login</Link></button>
                 </div>
 
             </div>
